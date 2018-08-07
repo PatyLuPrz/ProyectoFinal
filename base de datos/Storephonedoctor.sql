@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-08-2018 a las 04:36:12
+-- Tiempo de generación: 07-08-2018 a las 05:14:07
 -- Versión del servidor: 10.1.33-MariaDB
 -- Versión de PHP: 7.2.6
 
@@ -147,7 +147,8 @@ CREATE TABLE `usuarios` (
   `CONTRASENA_US` varchar(50) NOT NULL,
   `NOMBRE_US` varchar(30) NOT NULL,
   `AP_US` varchar(30) NOT NULL,
-  `AM_US` varchar(30) NOT NULL
+  `AM_US` varchar(30) NOT NULL,
+  `TIPO_US` varchar(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='REGISTRO DE USUARIOS DEL SISTEMA';
 
 -- --------------------------------------------------------
