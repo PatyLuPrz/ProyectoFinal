@@ -421,18 +421,22 @@
                               </Group>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jButtonRealizarVenta" pref="267" max="32767" attributes="0"/>
-                                  <Component id="jPanelTablaVenta" max="32767" attributes="0"/>
-                                  <Component id="jPanelTablaVenta2" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jButtonQuitarProd" min="-2" pref="127" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jButtonAgregarProd" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jButtonRealizarVenta" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jPanelTablaVenta" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jPanelTablaVenta2" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jButtonModificarVenta" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jButtonCancelarVenta" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="jButtonRealizarCalculo" min="-2" pref="127" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jButtonCancelarVenta" min="-2" pref="127" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jButtonRealizarCalculo" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -460,15 +464,18 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jButtonRealizarVenta" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButtonRealizarCalculo" min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jButtonQuitarProd" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="jButtonAgregarProd" min="-2" pref="30" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jButtonCancelarVenta" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="jButtonModificarVenta" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="jButtonRealizarCalculo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
+                          <EmptySpace pref="19" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -500,7 +507,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" pref="740" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" pref="781" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -622,7 +629,7 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jSpinner1" alignment="1" pref="156" max="32767" attributes="0"/>
+                                          <Component id="jSpinner1" alignment="1" max="32767" attributes="0"/>
                                           <Component id="jLabelProductoAVender" max="32767" attributes="0"/>
                                           <Component id="jLabelFechaVenta" max="32767" attributes="0"/>
                                           <Component id="jTextFieldFolioVenta" max="32767" attributes="0"/>
@@ -633,10 +640,6 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jButtonIniciarVenta" alignment="1" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jButtonAgregarProd" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
                                           <Component id="jLabelClienteVenta" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -673,8 +676,6 @@
                                   <Component id="jLabelClienteV" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
                                   <Component id="jLabelClienteVenta" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonAgregarProd" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jButtonIniciarVenta" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -724,17 +725,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTextFieldFolioVenta">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButtonAgregarProd">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Arial" size="10" style="3"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Agregar producto"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAgregarProdActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabelProductoV">
                       <Properties>
@@ -1097,18 +1087,21 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRealizarVentaActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButtonModificarVenta">
+                <Component class="javax.swing.JButton" name="jButtonRealizarCalculo">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="14" style="3"/>
+                      <Font name="Arial" size="12" style="3"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Modificar Venta"/>
+                    <Property name="text" type="java.lang.String" value="Realizar Calculo"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRealizarCalculoActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonCancelarVenta">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="14" style="3"/>
+                      <Font name="Arial" size="12" style="3"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Cancelar Venta"/>
                   </Properties>
@@ -1140,7 +1133,7 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane5" pref="588" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane5" pref="629" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="JButtonBuscarProd" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -1235,15 +1228,26 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="jButtonRealizarCalculo">
+                <Component class="javax.swing.JButton" name="jButtonQuitarProd">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="14" style="3"/>
+                      <Font name="Arial" size="12" style="3"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Realizar Calculo"/>
+                    <Property name="text" type="java.lang.String" value="Quitar Producto"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRealizarCalculoActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonQuitarProdActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButtonAgregarProd">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="12" style="3"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Agregar producto"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAgregarProdActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -1278,7 +1282,7 @@
                                   <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="187" max="32767" attributes="0"/>
+                          <EmptySpace pref="221" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1297,7 +1301,7 @@
                               <Component id="jPanel5" alignment="0" pref="201" max="32767" attributes="0"/>
                               <Component id="jPanel6" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="177" max="32767" attributes="0"/>
+                          <EmptySpace pref="182" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1885,7 +1889,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane4" pref="1035" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane4" pref="1069" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Component id="jButtonBuscarHistorialDevoluciones" min="-2" pref="119" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -1910,7 +1914,7 @@
                                   <Component id="jButtonBuscarHistorialDevoluciones1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" pref="550" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" pref="555" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -2087,7 +2091,7 @@
                                       <Component id="jComboBoxSeleccionaHistorial" min="-2" pref="215" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jTextFieldBuscarHistorial" min="-2" pref="390" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="281" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="315" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -2103,7 +2107,7 @@
                                   <Component id="jTextFieldBuscarHistorial" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" pref="550" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" pref="555" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
