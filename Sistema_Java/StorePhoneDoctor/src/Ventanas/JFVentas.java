@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -159,6 +160,7 @@ public class JFVentas extends javax.swing.JFrame {
         jButtonCancelarVenta.setEnabled(false);
         jButtonQuitarProd.setEnabled(false);
         jButtonAgregarProd.setEnabled(false);
+        jSpinner1.setEnabled(false);
 
         for (Component component : jPanelTablaClientes.getComponents()) {
             jTableClientes.setEnabled(false);
@@ -231,7 +233,7 @@ public class JFVentas extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabelTotalImport = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jLabelCambioCliente = new javax.swing.JLabel();
         jTextFieldPagado = new javax.swing.JTextField();
         jPanelTablaClientes = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -543,6 +545,13 @@ public class JFVentas extends javax.swing.JFrame {
         jLabelClienteVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelClienteVenta.setPreferredSize(new java.awt.Dimension(14, 24));
 
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jSpinner1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jSpinner1KeyTyped(evt);
+            }
+        });
+
         jLabelProductoV1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabelProductoV1.setForeground(new java.awt.Color(255, 255, 255));
         jLabelProductoV1.setText("Cantidad:");
@@ -620,19 +629,29 @@ public class JFVentas extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Pagado:    $");
 
+        jLabelTotalImport.setBackground(new java.awt.Color(0, 0, 0));
         jLabelTotalImport.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabelTotalImport.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTotalImport.setForeground(new java.awt.Color(0, 204, 0));
         jLabelTotalImport.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabelTotalImport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelTotalImport.setOpaque(true);
 
         jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Cambio:    $");
 
-        jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelCambioCliente.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCambioCliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabelCambioCliente.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCambioCliente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabelCambioCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelCambioCliente.setOpaque(true);
+
+        jTextFieldPagado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldPagadoKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelTablaVenta2Layout = new javax.swing.GroupLayout(jPanelTablaVenta2);
         jPanelTablaVenta2.setLayout(jPanelTablaVenta2Layout);
@@ -646,7 +665,7 @@ public class JFVentas extends javax.swing.JFrame {
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelTablaVenta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelCambioCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelTotalImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldPagado))
                 .addContainerGap())
@@ -665,7 +684,7 @@ public class JFVentas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelTablaVenta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelCambioCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(9, 9, 9))
         );
 
@@ -1749,11 +1768,17 @@ public class JFVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAgregarProdActionPerformed
 
     private void jButtonRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRealizarVentaActionPerformed
-        if (jTableProductosVender.getRowCount() < 1) {
+        if (jTextFieldPagado.equals("")) {
             JOptionPane.showMessageDialog(this, "Servido vato");
+            double importeACobrar = Double.parseDouble(jLabelTotalImport.getText());
+            System.out.println(importeACobrar);
+            double cantidadPagada = Double.parseDouble(jTextFieldPagado.getText());
+            double cambioCliente = (cantidadPagada - importeACobrar);
+            jLabelCambioCliente.setText(String.valueOf(cambioCliente));
         } else {
-            JOptionPane.showMessageDialog(this, "Ingrese algun producto");
+            JOptionPane.showMessageDialog(null, "Ingrese la cantidad a Cobrar");
         }
+
     }//GEN-LAST:event_jButtonRealizarVentaActionPerformed
 
     private void JButtonBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonBuscarProdActionPerformed
@@ -1846,6 +1871,7 @@ public class JFVentas extends javax.swing.JFrame {
             jPanelTablaClientes.setEnabled(false);
             jButtonQuitarProd.setEnabled(false);
             jButtonIniciarVenta.setEnabled(true);
+            jButtonAgregarProd.setEnabled(false);
 
         } else {
             JOptionPane.showMessageDialog(null, "No se agrego al carrito el producto");
@@ -1867,7 +1893,15 @@ public class JFVentas extends javax.swing.JFrame {
 
     private void jButtonQuitarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitarProdActionPerformed
         DefaultTableModel dtm = (DefaultTableModel) jTableProductosVender.getModel(); //TableProducto es el nombre de mi tabla ;) 
-        dtm.removeRow(jTableProductosVender.getSelectedRow());
+        try {
+            if (jTableProductosVender.getSelectedRow() != 1) {
+                dtm.removeRow(jTableProductosVender.getSelectedRow());
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un producto de Lista Venta");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Seleccione el producto\n para eliminar de la venta");
+        }
     }//GEN-LAST:event_jButtonQuitarProdActionPerformed
 
     private void jComboBoxTipoClienteVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoClienteVActionPerformed
@@ -1971,6 +2005,7 @@ public class JFVentas extends javax.swing.JFrame {
         jButtonQuitarProd.setEnabled(true);
         jButtonAgregarProd.setEnabled(true);
         jButtonIniciarVenta.setEnabled(false);
+        jSpinner1.setEnabled(true);
 
     }//GEN-LAST:event_jButtonIniciarVentaActionPerformed
 
@@ -1979,7 +2014,7 @@ public class JFVentas extends javax.swing.JFrame {
         if (cancelar == 0) {
             int filas = model.getRowCount();
             double totalE = 0.0;
-            
+
             for (int i = 0; i < filas; i++) {//Ciclo para obtener el importe de los productos
                 totalE = totalE + Double.parseDouble(model.getValueAt(i, 7).toString());
             }
@@ -1990,6 +2025,19 @@ public class JFVentas extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButtonRealizarCalculoActionPerformed
+
+    private void jSpinner1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSpinner1KeyTyped
+
+    }//GEN-LAST:event_jSpinner1KeyTyped
+
+    private void jTextFieldPagadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPagadoKeyTyped
+        if (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '.') {
+            evt.consume();
+        }
+        if (evt.getKeyChar() == '.' && jTextFieldPagado.getText().contains(".")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldPagadoKeyTyped
 
     /**
      * @param args the command line arguments
@@ -2063,7 +2111,6 @@ public class JFVentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2071,6 +2118,7 @@ public class JFVentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelCambioCliente;
     private javax.swing.JLabel jLabelClienteV;
     public javax.swing.JLabel jLabelClienteVenta;
     private javax.swing.JLabel jLabelFechaV;
