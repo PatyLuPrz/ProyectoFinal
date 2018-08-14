@@ -84,6 +84,8 @@ public class JFProductosUsuario extends javax.swing.JFrame {
         initComponents();
         tablaConsulta();
         rutaImagen = "";
+        
+        setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
 
         ImageIcon imagenLogo = new ImageIcon(getClass().getResource("/Images/LogoPrincipal.png"));
         Image fondoLogo = imagenLogo.getImage().getScaledInstance(jLabelLogoMenu.getWidth(), jLabelLogoMenu.getHeight(), Image.SCALE_SMOOTH);

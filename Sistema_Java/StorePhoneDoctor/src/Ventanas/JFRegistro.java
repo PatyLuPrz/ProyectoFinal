@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import modelo.SqlUsuarios;
 import modelo.hash;
 import modelo.usuarios;
+import Ventanas.JFMenuPrincipal;
 
 /**
  *
@@ -22,11 +23,16 @@ import modelo.usuarios;
  */
 public class JFRegistro extends javax.swing.JFrame {
 
+    public static JFMenuPrincipal menuP;
+
     /**
      * Creates new form JFLogin
      */
     public JFRegistro() {
         initComponents();
+        
+        setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
+        
         ImageIcon imagenLogin = new ImageIcon(getClass().getResource("/Images/FondoPrograma.png"));
         Image fondoLogin = imagenLogin.getImage().getScaledInstance(jLabelFondoLogin.getWidth(), jLabelFondoLogin.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscaladoLogin = new ImageIcon(fondoLogin);
@@ -42,10 +48,6 @@ public class JFRegistro extends javax.swing.JFrame {
         /*Evita que la ventana se Maximize*/
     }
 
-    public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Images/Icon.png"));
-        return retValue;/*Se genero una clase donde se manda llamar un icono para JFrame*/
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,6 +77,11 @@ public class JFRegistro extends javax.swing.JFrame {
         jLabelLogoLogin = new javax.swing.JLabel();
         jLabelTipoEmp = new javax.swing.JLabel();
         jComboBoxTipoUser = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
+        TIPOUSUARIOMENU = new javax.swing.JLabel();
+        USUARIOMENU = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabelFondoLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -201,7 +208,7 @@ public class JFRegistro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextFieldIngIngApellMUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 190, -1));
-        getContentPane().add(jLabelLogoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 190, 300));
+        getContentPane().add(jLabelLogoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 170, 280));
 
         jLabelTipoEmp.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabelTipoEmp.setForeground(new java.awt.Color(255, 255, 255));
@@ -212,6 +219,51 @@ public class JFRegistro extends javax.swing.JFrame {
         jComboBoxTipoUser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jComboBoxTipoUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona", "Administrador", "Usuario" }));
         getContentPane().add(jComboBoxTipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 190, -1));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), "sesión", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel2.setOpaque(false);
+
+        TIPOUSUARIOMENU.setFont(new java.awt.Font("Dialog", 3, 10)); // NOI18N
+        TIPOUSUARIOMENU.setForeground(new java.awt.Color(255, 255, 255));
+
+        USUARIOMENU.setFont(new java.awt.Font("Dialog", 3, 10)); // NOI18N
+        USUARIOMENU.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Username:");
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Categoria:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(USUARIOMENU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TIPOUSUARIOMENU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(USUARIOMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(TIPOUSUARIOMENU, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 180, -1));
         getContentPane().add(jLabelFondoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 390));
 
         pack();
@@ -240,11 +292,12 @@ public class JFRegistro extends javax.swing.JFrame {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         int cancelar = JOptionPane.showConfirmDialog(null, "¿Desea cancelar el registro?", "Confirmar salida", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (cancelar == 0) {
-            if (JFLogin.log == null) {
-                JFLogin log = new JFLogin();
-                log.setVisible(true);
-
-                JFLogin.reg = null;
+            if (menuP == null) {
+                JFMenuPrincipal men = new JFMenuPrincipal();
+                men.setVisible(true);
+                men.USUARIOMENU.setText(USUARIOMENU.getText());
+                men.TIPOUSUARIOMENU.setText(TIPOUSUARIOMENU.getText());
+                this.setVisible(false);
                 this.dispose();
             }
         } else {
@@ -363,11 +416,15 @@ public class JFRegistro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JLabel TIPOUSUARIOMENU;
+    public javax.swing.JLabel USUARIOMENU;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonRegistrarse;
     private javax.swing.JComboBox<String> jComboBoxTipoUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelFondoLogin;
     private javax.swing.JLabel jLabelIconUser;
     private javax.swing.JLabel jLabelIngApellidoM;
@@ -376,6 +433,7 @@ public class JFRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelIngNombre;
     private javax.swing.JLabel jLabelLogoLogin;
     private javax.swing.JLabel jLabelTipoEmp;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordFieldIngContraseña;
     private javax.swing.JPasswordField jPasswordFieldVerifContraseña;
     private javax.swing.JTextField jTextFieldCorreoUsuario;

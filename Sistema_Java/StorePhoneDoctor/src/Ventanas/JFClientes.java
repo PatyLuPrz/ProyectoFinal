@@ -77,6 +77,9 @@ public class JFClientes extends javax.swing.JFrame {
         tablaConsulta();
         jButtonGuardarC.setEnabled(false);
         jButtonCancelarC.setEnabled(false);
+        
+        setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
+        
         ImageIcon imagenLogo = new ImageIcon(getClass().getResource("/Images/LogoPrincipal.png"));
         Image fondoLogo = imagenLogo.getImage().getScaledInstance(jLabelLogoMenu.getWidth(), jLabelLogoMenu.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscaladoLogo = new ImageIcon(fondoLogo);
@@ -178,7 +181,6 @@ public class JFClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StorePhone Doctor");
-        setIconImage(getIconImage());
         setMaximumSize(new java.awt.Dimension(1121, 640));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {

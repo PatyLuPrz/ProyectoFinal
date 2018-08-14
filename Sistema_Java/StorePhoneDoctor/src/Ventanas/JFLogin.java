@@ -8,7 +8,6 @@ package Ventanas;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import modelo.SqlUsuarios;
 import modelo.hash;
@@ -23,13 +22,18 @@ public class JFLogin extends javax.swing.JFrame {
     public static JFLogin log;
     public static JFRegistro reg;
     public static JFMenuPrincipal menu;
+    
 
     /**
      * Creates new form JFLogin
      */
     public JFLogin() {
         initComponents();
-
+        
+        this.setOpacity(0.9f);
+        
+        setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
+        
         ImageIcon imagenLogin = new ImageIcon(getClass().getResource("/Images/FondoPrograma.png"));
         Image fondoLogin = imagenLogin.getImage().getScaledInstance(jLabelFondoLogin.getWidth(), jLabelFondoLogin.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscaladoLogin = new ImageIcon(fondoLogin);
@@ -61,7 +65,6 @@ public class JFLogin extends javax.swing.JFrame {
         jButtonIniciarSesion = new javax.swing.JButton();
         jLabelIconUser = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButtonRegistrarse = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabelRecuperarContraseña = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -112,22 +115,11 @@ public class JFLogin extends javax.swing.JFrame {
         jLabel1.setText("Contraseña:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, 40));
 
-        jButtonRegistrarse.setBackground(java.awt.Color.white);
-        jButtonRegistrarse.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jButtonRegistrarse.setText("Registrarse");
-        jButtonRegistrarse.setToolTipText("");
-        jButtonRegistrarse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRegistrarseActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButtonRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 220, 30));
-
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 220, 10));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 220, 10));
 
         jLabelRecuperarContraseña.setText("¿Olvidaste tu Usuario o Contraseña?");
-        getContentPane().add(jLabelRecuperarContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 250, 30));
+        getContentPane().add(jLabelRecuperarContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 250, 30));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconClose.png"))); // NOI18N
@@ -195,17 +187,6 @@ public class JFLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
-    private void jButtonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarseActionPerformed
-        if (reg == null) {
-            reg = new JFRegistro();
-            reg.setVisible(true);
-
-            this.dispose();
-
-        }
-
-    }//GEN-LAST:event_jButtonRegistrarseActionPerformed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         JFLogin.log = null;
     }//GEN-LAST:event_formWindowClosing
@@ -253,7 +234,6 @@ public class JFLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonIniciarSesion;
-    private javax.swing.JButton jButtonRegistrarse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelFondoLogin;
     private javax.swing.JLabel jLabelIconUser;
@@ -266,4 +246,5 @@ public class JFLogin extends javax.swing.JFrame {
     public javax.swing.JTextField jTextFieldTomarUsuario;
     private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
+
 }

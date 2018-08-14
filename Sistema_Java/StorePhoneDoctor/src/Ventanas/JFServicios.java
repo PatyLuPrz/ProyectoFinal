@@ -81,6 +81,8 @@ public class JFServicios extends javax.swing.JFrame {
 
         jButtonGuardarS.setEnabled(false);
         jButtonCancelarS.setEnabled(false);
+        
+        setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
 
         ImageIcon imagenLogo = new ImageIcon(getClass().getResource("/Images/LogoPrincipal.png"));
         Image fondoLogo = imagenLogo.getImage().getScaledInstance(jLabelLogoMenu.getWidth(), jLabelLogoMenu.getHeight(), Image.SCALE_SMOOTH);

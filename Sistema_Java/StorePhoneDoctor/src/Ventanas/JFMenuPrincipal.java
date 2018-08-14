@@ -5,9 +5,11 @@
  */
 package Ventanas;
 
+import static Ventanas.JFLogin.reg;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import modelo.SqlUsuarios;
 import modelo.usuarios;
 
@@ -31,9 +33,12 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
 
     public JFMenuPrincipal() {
         user();
-
+                
+        setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
+        
         //Insertar imagenes en un JLabel y redimensionarlas al tamaño del Jlabel 
         initComponents();
+        this.setOpacity(0.9f);
         ImageIcon imagenUno = new ImageIcon(getClass().getResource("/Images/ProductosMenu.png"));
         Image fondoUno = imagenUno.getImage().getScaledInstance(jLabelLogoProductos.getWidth(), jLabelLogoProductos.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscalado = new ImageIcon(fondoUno);
@@ -90,10 +95,13 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuUsuarios = new javax.swing.JMenu();
         jMenuCerrarSesionUser = new javax.swing.JMenu();
+        jMenuNuevoUSer = new javax.swing.JMenu();
+        jMenuAdminUsuarios = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MENU");
         setBackground(new java.awt.Color(51, 51, 51));
+        setUndecorated(true);
         setResizable(false);
         addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -313,6 +321,11 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
 
         jMenuUsuarios.setBackground(new java.awt.Color(255, 255, 255));
         jMenuUsuarios.setText("Usuarios");
+        jMenuUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuUsuariosMouseClicked(evt);
+            }
+        });
 
         jMenuCerrarSesionUser.setText("Cerrar Sesion");
         jMenuCerrarSesionUser.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -327,6 +340,22 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         });
         jMenuUsuarios.add(jMenuCerrarSesionUser);
 
+        jMenuNuevoUSer.setText("Agregar Nuevo Usuario");
+        jMenuNuevoUSer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuNuevoUSerMouseClicked(evt);
+            }
+        });
+        jMenuUsuarios.add(jMenuNuevoUSer);
+
+        jMenuAdminUsuarios.setText("Administrar Usuarios");
+        jMenuAdminUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuAdminUsuariosMouseClicked(evt);
+            }
+        });
+        jMenuUsuarios.add(jMenuAdminUsuarios);
+
         jMenuBar1.add(jMenuUsuarios);
 
         setJMenuBar(jMenuBar1);
@@ -335,10 +364,7 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanelMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,11 +463,42 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         if (JFLogin.log == null) {
             JFLogin log = new JFLogin();
             log.setVisible(true);
-
             JFLogin.menu = null;
             this.dispose();
         }
     }//GEN-LAST:event_jMenuCerrarSesionUserMouseClicked
+
+    private void jMenuUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuUsuariosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuUsuariosMouseClicked
+
+    private void jMenuNuevoUSerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuNuevoUSerMouseClicked
+        if (TIPOUSUARIOMENU.getText().equals("Administrador")) {
+            reg = new JFRegistro();
+            reg.setVisible(true);
+            reg.USUARIOMENU.setText(USUARIOMENU.getText());
+            reg.TIPOUSUARIOMENU.setText(TIPOUSUARIOMENU.getText());
+            this.setVisible(false);
+            this.dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No tienes permisos para acceder");
+        }
+    }//GEN-LAST:event_jMenuNuevoUSerMouseClicked
+
+    private void jMenuAdminUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAdminUsuariosMouseClicked
+        if (TIPOUSUARIOMENU.getText().equals("Administrador")) {
+            JFAdminUsers reg = new JFAdminUsers();
+            reg.setVisible(true);
+            reg.USUARIOMENU.setText(USUARIOMENU.getText());
+            reg.TIPOUSUARIOMENU.setText(TIPOUSUARIOMENU.getText());
+            this.setVisible(false);
+            this.dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No tienes permisos para acceder");
+        }
+    }//GEN-LAST:event_jMenuAdminUsuariosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -495,8 +552,10 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenuAdminUsuarios;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCerrarSesionUser;
+    private javax.swing.JMenu jMenuNuevoUSer;
     private javax.swing.JMenu jMenuUsuarios;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelMenuPrincipal;
