@@ -142,7 +142,7 @@ public class JFVentas extends javax.swing.JFrame {
         initComponents();
         tablaConsultaClientes();
         tablaConsultaProductos();
-        
+
         jLabelClienteVenta.setText("Publico General");
         /*Fondo de Menu Secundario*/
         ImageIcon imagenLogo = new ImageIcon(getClass().getResource("/Images/LogoPrincipal.png"));
@@ -157,6 +157,7 @@ public class JFVentas extends javax.swing.JFrame {
         jButtonRealizarVenta.setEnabled(false);
         jButtonModificarVenta.setEnabled(false);
         jButtonCancelarVenta.setEnabled(false);
+        jButtonRealizarCalculo.setEnabled(false);
 
         for (Component component : jPanelTablaClientes.getComponents()) {
             jTableClientes.setEnabled(false);
@@ -167,24 +168,6 @@ public class JFVentas extends javax.swing.JFrame {
             jTableInventarioVenta.setEnabled(false);
             component.setEnabled(false);
         }
-
-        jTableInventarioVenta.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            //Se obtiene la seleccion de una lista y se imprime en los jTextField
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                try {
-
-                    if (jTableInventarioVenta.getSelectedRow() != -1) {
-                        int fila = jTableInventarioVenta.getSelectedRow();
-
-                        jLabelProductoAVender.setText(jTableInventarioVenta.getValueAt(fila, 0).toString());
-
-                    }
-                } catch (Exception err) {
-                    JOptionPane.showMessageDialog(null, "Error:\nSelecciona un registro");
-                }
-            }
-        });
 
         //Tabla de ventas
         this.jTableProductosVender.setModel(model);
@@ -1689,6 +1672,23 @@ public class JFVentas extends javax.swing.JFrame {
 
             for (Component component : jPanelTablaProductos.getComponents()) {
                 jTableInventarioVenta.setEnabled(true);
+                jTableInventarioVenta.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                    //Se obtiene la seleccion de una lista y se imprime en los jTextField
+                    @Override
+                    public void valueChanged(ListSelectionEvent e) {
+                        try {
+
+                            if (jTableInventarioVenta.getSelectedRow() != -1) {
+                                int fila = jTableInventarioVenta.getSelectedRow();
+
+                                jLabelProductoAVender.setText(jTableInventarioVenta.getValueAt(fila, 0).toString());
+
+                            }
+                        } catch (Exception err) {
+                            JOptionPane.showMessageDialog(null, "Error:\nSelecciona un registro");
+                        }
+                    }
+                });
                 component.setEnabled(true);
             }
 
@@ -1698,6 +1698,7 @@ public class JFVentas extends javax.swing.JFrame {
             jTabbedPane1.setEnabled(false);
             jPanelTablaProductos.setEnabled(true);
             jPanelTablaClientes.setEnabled(true);
+            jButtonRealizarCalculo.setEnabled(true);
 
             SqlAgregarVenta sqlVenA = new SqlAgregarVenta();
             agregarVenta agreV = new agregarVenta();
@@ -1869,11 +1870,11 @@ public class JFVentas extends javax.swing.JFrame {
 
             int b = 0;
             for (int i = 0; i < model.getRowCount(); i++) {//ciclo que busca el codigo del producto y lo iguala para sumar solo la cantidad
-                b += 1;
+
                 String s2 = model.getValueAt(i, 7).toString();
                 double s3 = Double.parseDouble(s2);
-                double s4 = s3 += s3;
-                System.out.println(s4);
+                double s4 = s3 + s3;
+                System.out.println(s2);
 
             }
         } else {
@@ -1909,7 +1910,41 @@ public class JFVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxTipoClienteVActionPerformed
 
     private void jButtonBuscarClienteVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarClienteVActionPerformed
-        // TODO add your handling code here:
+        try {
+            DefaultTableModel modelo = new DefaultTableModel();
+            jTableClientes.setModel(modelo);
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            String buscarCliente = this.jTextFieldBuscarClienteV.getText();
+
+            String sql = "SELECT  USERNAME_CL FROM clientes WHERE USERNAME_CL LIKE '%" + buscarCliente + "%'";
+            System.out.println(rs);
+
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Username");
+
+            while (rs.next()) {
+
+                Object[] filas = new Object[cantidadColumnas];
+
+                for (int i = 0; i < cantidadColumnas; i++) {
+
+                    filas[i] = rs.getObject(i + 1);
+                }
+
+                modelo.addRow(filas);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error" + ex);
+        }
     }//GEN-LAST:event_jButtonBuscarClienteVActionPerformed
 
     /**
