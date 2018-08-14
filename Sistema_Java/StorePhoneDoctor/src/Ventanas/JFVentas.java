@@ -229,7 +229,7 @@ public class JFVentas extends javax.swing.JFrame {
         jPanelTablaVenta2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabelTotal = new javax.swing.JLabel();
+        jLabelTotalImport = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jTextFieldPagado = new javax.swing.JTextField();
@@ -520,6 +520,7 @@ public class JFVentas extends javax.swing.JFrame {
         jLabelFechaVenta.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelFechaVenta.setForeground(new java.awt.Color(255, 255, 255));
         jLabelFechaVenta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabelFechaVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelFechaVenta.setPreferredSize(new java.awt.Dimension(14, 24));
 
         jLabelProductoV.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -529,6 +530,7 @@ public class JFVentas extends javax.swing.JFrame {
         jLabelProductoAVender.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelProductoAVender.setForeground(new java.awt.Color(255, 255, 255));
         jLabelProductoAVender.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabelProductoAVender.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelProductoAVender.setPreferredSize(new java.awt.Dimension(14, 24));
 
         jLabelClienteV.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -538,6 +540,7 @@ public class JFVentas extends javax.swing.JFrame {
         jLabelClienteVenta.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelClienteVenta.setForeground(new java.awt.Color(255, 255, 255));
         jLabelClienteVenta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabelClienteVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelClienteVenta.setPreferredSize(new java.awt.Dimension(14, 24));
 
         jLabelProductoV1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -617,15 +620,19 @@ public class JFVentas extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Pagado:    $");
 
-        jLabelTotal.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabelTotal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabelTotalImport.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabelTotalImport.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTotalImport.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabelTotalImport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Cambio:    $");
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanelTablaVenta2Layout = new javax.swing.GroupLayout(jPanelTablaVenta2);
         jPanelTablaVenta2.setLayout(jPanelTablaVenta2Layout);
@@ -640,7 +647,7 @@ public class JFVentas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelTablaVenta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelTotalImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldPagado))
                 .addContainerGap())
         );
@@ -650,7 +657,7 @@ public class JFVentas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelTablaVenta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(jLabelTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelTotalImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelTablaVenta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
@@ -1970,18 +1977,14 @@ public class JFVentas extends javax.swing.JFrame {
     private void jButtonRealizarCalculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRealizarCalculoActionPerformed
         int cancelar = JOptionPane.showConfirmDialog(null, "¿Desea agregar un producto al carrito?", "Confirmar salida", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (cancelar == 0) {
-            int s = model.getRowCount();
-            System.out.println(s);
-
-            int b = 0;
-            for (int i = 0; i < model.getRowCount(); i++) {//ciclo que busca el codigo del producto y lo iguala para sumar solo la cantidad
-
-                String s2 = model.getValueAt(i, 7).toString();
-                double s3 = Double.parseDouble(s2);
-                double s4 = s3 + s3;
-                System.out.println(s4);
-
+            int filas = model.getRowCount();
+            double totalE = 0.0;
+            
+            for (int i = 0; i < filas; i++) {//Ciclo para obtener el importe de los productos
+                totalE = totalE + Double.parseDouble(model.getValueAt(i, 7).toString());
             }
+            jLabelTotalImport.setText(String.valueOf(totalE));
+            //El label de Totalimport cambia su contenido por el resultado del importe de la venta
         } else {
             JOptionPane.showMessageDialog(null, "No se agrego al carrito el producto");
         }
@@ -2077,7 +2080,7 @@ public class JFVentas extends javax.swing.JFrame {
     public javax.swing.JLabel jLabelProductoAVender;
     private javax.swing.JLabel jLabelProductoV;
     private javax.swing.JLabel jLabelProductoV1;
-    private javax.swing.JLabel jLabelTotal;
+    private javax.swing.JLabel jLabelTotalImport;
     private javax.swing.JLayeredPane jLayeredPaneCajas;
     private javax.swing.JLayeredPane jLayeredPaneDevoluciones;
     private javax.swing.JLayeredPane jLayeredPaneHistorialV;
