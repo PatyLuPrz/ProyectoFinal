@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="main.css" type="text/css"> </head>
 
-<body class="" style="background-image: url('../img/FondoPrograma.png');background-repeat:no-repeat;">
+<body class="" style="background-image: url('img/FondoPrograma.png');background-repeat:no-repeat;">
   <div class="p-4">
     <div class="container">
       <div class="row"></div>
@@ -24,16 +24,16 @@
         <div class="col-md-6">
           <h1>Contactanos</h1>
           <p>Estaremos encantados de escuchar tus opiniones, pedidos y sugerencias</p>
-          <form>
+          <form method="post" action="mailto:storephonedoctor@gmail.com">
             <div class="form-group">
               <label for="InputName">¿Cuál es tu nombre?</label>
-              <input type="text" class="form-control" id="InputName" placeholder="Tu nombre"> </div>
+              <input type="text" name="asunto" class="form-control" id="InputName" placeholder="Tu nombre"> </div>
             <div class="form-group">
               <label for="InputEmail1">Correo electronico</label>
-              <input type="email" class="form-control" id="InputEmail1" placeholder="Ingresa tu correo"> </div>
+              <input type="email" name="correo" class="form-control" id="InputEmail1" placeholder="Ingresa tu correo"> </div>
             <div class="form-group">
               <label for="Textarea">Mensaje</label>
-              <textarea class="form-control" id="Textarea" rows="3" placeholder="Escribe aquí tu mensaje"></textarea>
+              <textarea class="form-control" name="mensaje" id="Textarea" rows="3" placeholder="Escribe aquí tu mensaje"></textarea>
             </div>
             <button type="submit" class="btn btn-secondary">Enviar</button>
           </form>
