@@ -1,9 +1,11 @@
+create database storephonedoctor;
+use storephonedoctor;
 -- phpMyAdmin SQL Dump
 -- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-08-2018 a las 05:14:07
+-- Tiempo de generación: 12-08-2018 a las 00:47:36
 -- Versión del servidor: 10.1.33-MariaDB
 -- Versión de PHP: 7.2.6
 
@@ -36,8 +38,9 @@ CREATE TABLE `clientes` (
   `AP_CL` varchar(30) NOT NULL,
   `AM_CL` varchar(30) NOT NULL,
   `TEL_CL` varchar(15) NOT NULL,
-  `MUN_CL` varchar(20) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='REGISTRO DE CLIENTES FRECUENTES';
+  `MUN_CL` varchar(20) NOT NULL,
+  `STATUS_CL` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='REGISTRO DE CLIENTES FRECUENTES';
 
 -- --------------------------------------------------------
 
@@ -76,21 +79,22 @@ CREATE TABLE `productos` (
   `PRECIO_VENTA_P` float NOT NULL,
   `PRECIO_COMPRA_P` float NOT NULL,
   `IMG_P` varchar(250) DEFAULT NULL,
-  `FOTO_P` longblob
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='REGISTRO DEL INVENTARIO';
+  `FOTO_P` longblob,
+  `STATUS_P` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='REGISTRO DEL INVENTARIO';
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`CODIGO_P`, `NOMBRE_P`, `CATEGORIA_P`, `MARCA_P`, `CANTIDAD_P`, `PRECIO_VENTA_P`, `PRECIO_COMPRA_P`, `IMG_P`, `FOTO_P`) VALUES
-('0000000000001', 'Funda de silicon', 'Venta Normal', 'iPhone', 15, 120, 50, 'img/Silicon-Case-2.jpg', NULL),
-('0000000000002', 'Mica de cristal', 'Micas', 'Samsung', 5, 70, 20, 'img/moss-mica-iphone6-264x300.png', NULL),
-('0000000000003', 'Funda de metal', 'Inversion', 'iPhone', 5, 100, 50, 'img/Hyper-Lux-8-264x300.jpg', NULL),
-('0000000000004', 'Covertidor OGT-USB', 'Inversion', 'Adata', 5, 150, 85, 'img/Convertidor-OTG-USB-a-Tipo-C-11-264x300.jpg', NULL),
-('0000000000005', 'Adaptador Plug USB', 'Venta Normal', 'Generico', 15, 150, 80, 'img/ADAPTADOR-PLUG-LED-1-USB-1-264x300.jpg', NULL),
-('0000000000006', 'Cable de datos USB', 'Venta normal', 'Generico', 10, 50, 10, 'img/Cable-de-datos-micro-USB-3M-264x300.jpg', NULL),
-('0000000000007', 'Liquido nano protector', 'Inversion', 'Hi Tech', 5, 400, 150, 'img/LIQUIDO-NANO-PROTECTOR-MOSS-1-ML-producto-300x300.jpg', NULL);
+INSERT INTO `productos` (`CODIGO_P`, `NOMBRE_P`, `CATEGORIA_P`, `MARCA_P`, `CANTIDAD_P`, `PRECIO_VENTA_P`, `PRECIO_COMPRA_P`, `IMG_P`, `FOTO_P`, `STATUS_P`) VALUES
+('0000000000001', 'Funda de silicon', 'Venta Normal', 'iPhone', 15, 120, 50, 'img/Silicon-Case-2.jpg', NULL, 1),
+('0000000000002', 'Mica de cristal', 'Micas', 'Samsung', 5, 70, 20, 'img/moss-mica-iphone6-264x300.png', NULL, 1),
+('0000000000003', 'Funda de metal', 'Inversion', 'iPhone', 5, 100, 50, 'img/Hyper-Lux-8-264x300.jpg', NULL, 1),
+('0000000000004', 'Covertidor OGT-USB', 'Inversion', 'Adata', 5, 150, 85, 'img/Convertidor-OTG-USB-a-Tipo-C-11-264x300.jpg', NULL, 1),
+('0000000000005', 'Adaptador Plug USB', 'Venta Normal', 'Generico', 15, 150, 80, 'img/ADAPTADOR-PLUG-LED-1-USB-1-264x300.jpg', NULL, 1),
+('0000000000006', 'Cable de datos USB', 'Venta normal', 'Generico', 10, 50, 10, 'img/Cable-de-datos-micro-USB-3M-264x300.jpg', NULL, 1),
+('0000000000007', 'Liquido nano protector', 'Inversion', 'Hi Tech', 5, 400, 150, 'img/LIQUIDO-NANO-PROTECTOR-MOSS-1-ML-producto-300x300.jpg', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -106,8 +110,9 @@ CREATE TABLE `servicios` (
   `FECHASALIDA_S` date DEFAULT NULL,
   `NOMBRECLIENTE_S` varchar(60) NOT NULL,
   `TELEFONOCLIENTE_S` varchar(20) NOT NULL,
-  `DESCRIPCION_S` varchar(250) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='BITACORA DE SERVICIOS';
+  `DESCRIPCION_S` varchar(250) NOT NULL,
+  `STATUS_S` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='BITACORA DE SERVICIOS';
 
 -- --------------------------------------------------------
 
@@ -148,8 +153,9 @@ CREATE TABLE `usuarios` (
   `NOMBRE_US` varchar(30) NOT NULL,
   `AP_US` varchar(30) NOT NULL,
   `AM_US` varchar(30) NOT NULL,
-  `TIPO_US` varchar(20) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='REGISTRO DE USUARIOS DEL SISTEMA';
+  `TIPO_US` varchar(20) NOT NULL,
+  `STATUS_US` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='REGISTRO DE USUARIOS DEL SISTEMA';
 
 -- --------------------------------------------------------
 
@@ -162,8 +168,9 @@ CREATE TABLE `ventas` (
   `USERNAME_US` varchar(20) NOT NULL,
   `USERNAME_CL` varchar(50) NOT NULL,
   `FECHA_V` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `CANTIDADPROD_V` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='BITACORA DE VENTAS';
+  `CANTIDADPROD_V` int(11) NOT NULL,
+  `STATUS_V` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='BITACORA DE VENTAS';
 
 -- --------------------------------------------------------
 
@@ -174,8 +181,9 @@ CREATE TABLE `ventas` (
 CREATE TABLE `ventas_producto` (
   `ID_VP` varchar(5) NOT NULL,
   `FOLIO_V` varchar(10) NOT NULL,
-  `CODIGO_P` varchar(13) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='PRODUCTOS VENDIDOS';
+  `CODIGO_P` varchar(13) NOT NULL,
+  `STATUS_VP` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='PRODUCTOS VENDIDOS';
 
 -- --------------------------------------------------------
 
@@ -260,6 +268,31 @@ ALTER TABLE `ventas_producto`
   ADD PRIMARY KEY (`ID_VP`),
   ADD KEY `FK_V` (`FOLIO_V`),
   ADD KEY `FK_P` (`CODIGO_P`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `servicios`
+--
+ALTER TABLE `servicios`
+  ADD CONSTRAINT `FK_CL` FOREIGN KEY (`USERNAME_CL`) REFERENCES `clientes` (`USERNAME_CL`),
+  ADD CONSTRAINT `FK_US` FOREIGN KEY (`USERNAME_US`) REFERENCES `usuarios` (`USERNAME_US`);
+
+--
+-- Filtros para la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD CONSTRAINT `FK_CL_V` FOREIGN KEY (`USERNAME_CL`) REFERENCES `clientes` (`USERNAME_CL`),
+  ADD CONSTRAINT `FK_US_V` FOREIGN KEY (`USERNAME_US`) REFERENCES `usuarios` (`USERNAME_US`);
+
+--
+-- Filtros para la tabla `ventas_producto`
+--
+ALTER TABLE `ventas_producto`
+  ADD CONSTRAINT `FK_P` FOREIGN KEY (`CODIGO_P`) REFERENCES `productos` (`CODIGO_P`),
+  ADD CONSTRAINT `FK_V` FOREIGN KEY (`FOLIO_V`) REFERENCES `ventas` (`FOLIO_V`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
