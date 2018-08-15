@@ -40,6 +40,29 @@ public class SqlUsuarios extends Conexion {
         }
 
     }
+    
+    public boolean modificarUsers(usuarios usr) { //Metodo para registrar un usuario
+        PreparedStatement ps = null; //variable de Statement 
+        Connection con = (Connection) getConexion(); //Se obtiene la conexion para la clase
+
+        String sqlPro = "UPDATE usuarios SET EMAIL_US=?, NOMBRE_US=?, AP_US=?, AM_US=?, TIPO_US=? WHERE USERNAME_US = ?";
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sqlPro);
+            ps.setString(6, usr.getUsername());
+            ps.setString(1, usr.getEmail_user());
+            ps.setString(2, usr.getNombre_user());
+            ps.setString(3, usr.getAp_user());
+            ps.setString(4, usr.getAm_user());
+            ps.setString(5, usr.getTipo_user());
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(SqlUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error" + ex);
+            return false;
+        }
+
+    }
 
     public boolean login(usuarios usr) { //Se valida si un Usuario existe para negar el registro
 

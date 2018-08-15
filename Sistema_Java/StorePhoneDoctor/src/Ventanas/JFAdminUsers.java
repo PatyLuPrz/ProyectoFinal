@@ -12,8 +12,13 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import modelo.Conexion;
+import modelo.SqlUsuarios;
+import modelo.hash;
+import modelo.usuarios;
 
 /**
  *
@@ -42,8 +47,8 @@ public class JFAdminUsers extends javax.swing.JFrame {
             modelo.addColumn("Username");
             modelo.addColumn("Email");
             modelo.addColumn("Nombre");
-            modelo.addColumn("Ape. P");
-            modelo.addColumn("Ape. M");
+            modelo.addColumn("Apellido Paterno");
+            modelo.addColumn("Apellido Materno");
             modelo.addColumn("Tipo");
             while (rs.next()) {
 
@@ -61,6 +66,15 @@ public class JFAdminUsers extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error" + ex);
         }
     }
+
+    public void limpiar() {
+        jTextFieldIngUsuario.setText("");
+        jTextFieldCorreoUsuario.setText("");
+        jTextFieldIngNombreUsuario.setText("");
+        jTextFieldIngIngApellPUsuario.setText("");
+        jTextFieldIngIngApellMUsuario.setText("");
+        jComboBoxTipoUser.setSelectedItem("Selecciona");
+    }
     /**
      * Creates new form JFAdminUsers
      */
@@ -72,6 +86,29 @@ public class JFAdminUsers extends javax.swing.JFrame {
         //Se usa para insertar un icono al Jframe
         setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
         setLocationRelativeTo(null);
+
+        jTableAdminUsers.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            //Se obtiene la seleccion de una lista y se imprime en los jTextField
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                try {
+
+                    if (jTableAdminUsers.getSelectedRow() != -1) {
+                        int fila = jTableAdminUsers.getSelectedRow();
+
+                        jTextFieldIngUsuario.setText(jTableAdminUsers.getValueAt(fila, 0).toString());
+                        jTextFieldCorreoUsuario.setText(jTableAdminUsers.getValueAt(fila, 1).toString());
+                        jComboBoxTipoUser.setSelectedItem(jTableAdminUsers.getValueAt(fila, 5).toString());
+                        jTextFieldIngNombreUsuario.setText(jTableAdminUsers.getValueAt(fila, 2).toString());
+                        jTextFieldIngIngApellPUsuario.setText(jTableAdminUsers.getValueAt(fila, 3).toString());
+                        jTextFieldIngIngApellMUsuario.setText(jTableAdminUsers.getValueAt(fila, 4).toString());
+                    }
+                } catch (Exception err) {
+                    JOptionPane.showMessageDialog(null, "Error:\nSelecciona un registro");
+                }
+            }
+        });
+
     }
 
     /**
@@ -89,19 +126,31 @@ public class JFAdminUsers extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButtonMenuP = new javax.swing.JButton();
         jPanelEdicionUsers = new javax.swing.JPanel();
-        jTextFieldBuscarUsuer = new javax.swing.JTextField();
-        jLabelIconoBuscar = new javax.swing.JLabel();
         jPanelSesion = new javax.swing.JPanel();
         TIPOUSUARIOMENU = new javax.swing.JLabel();
         USUARIOMENU = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButtonBorrar = new javax.swing.JButton();
-        jButtonModificar = new javax.swing.JButton();
+        jLabelIconUser = new javax.swing.JLabel();
+        jTextFieldIngUsuario = new javax.swing.JTextField();
+        jLabelTipoEmp = new javax.swing.JLabel();
+        jComboBoxTipoUser = new javax.swing.JComboBox<>();
+        jLabelIngNombre = new javax.swing.JLabel();
+        jTextFieldIngNombreUsuario = new javax.swing.JTextField();
+        jLabelIngApellidoM = new javax.swing.JLabel();
+        jTextFieldIngIngApellPUsuario = new javax.swing.JTextField();
+        jLabelIngApellidoP = new javax.swing.JLabel();
+        jTextFieldIngIngApellMUsuario = new javax.swing.JTextField();
+        jLabelIngCorreo = new javax.swing.JLabel();
+        jTextFieldCorreoUsuario = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jTextFieldBuscarUsuer = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAdminUsers = new javax.swing.JTable();
+        jLabelIconoBuscar = new javax.swing.JLabel();
+        jButtonBorrar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -157,11 +206,6 @@ public class JFAdminUsers extends javax.swing.JFrame {
 
         jPanelEdicionUsers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelEdicionUsers.setOpaque(false);
-        jPanelEdicionUsers.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanelEdicionUsers.add(jTextFieldBuscarUsuer, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 264, 140, 30));
-
-        jLabelIconoBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconoBuscar.png"))); // NOI18N
-        jPanelEdicionUsers.add(jLabelIconoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 252, -1, 50));
 
         jPanelSesion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), "sesión", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanelSesion.setOpaque(false);
@@ -206,19 +250,167 @@ public class JFAdminUsers extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelEdicionUsers.add(jPanelSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 320, -1, -1));
+        jLabelIconUser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabelIconUser.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelIconUser.setText("Nombre de Usuario:");
+        jLabelIconUser.setAlignmentX(0.5F);
 
-        jButtonBorrar.setText("Borrar");
-        jPanelEdicionUsers.add(jButtonBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 190, -1));
+        jTextFieldIngUsuario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldIngUsuario.setAutoscrolls(false);
+        jTextFieldIngUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIngUsuarioActionPerformed(evt);
+            }
+        });
 
-        jButtonModificar.setText("Modificar");
-        jPanelEdicionUsers.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 190, -1));
+        jLabelTipoEmp.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabelTipoEmp.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTipoEmp.setText("Tipo:");
+        jLabelTipoEmp.setAlignmentX(0.5F);
+
+        jComboBoxTipoUser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboBoxTipoUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona", "Administrador", "Usuario" }));
+
+        jLabelIngNombre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabelIngNombre.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelIngNombre.setText("Nombre:");
+        jLabelIngNombre.setAlignmentX(0.5F);
+
+        jTextFieldIngNombreUsuario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldIngNombreUsuario.setAutoscrolls(false);
+        jTextFieldIngNombreUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIngNombreUsuarioActionPerformed(evt);
+            }
+        });
+
+        jLabelIngApellidoM.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabelIngApellidoM.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelIngApellidoM.setText("Apellido Paterno:");
+        jLabelIngApellidoM.setAlignmentX(0.5F);
+
+        jTextFieldIngIngApellPUsuario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldIngIngApellPUsuario.setAutoscrolls(false);
+        jTextFieldIngIngApellPUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIngIngApellPUsuarioActionPerformed(evt);
+            }
+        });
+
+        jLabelIngApellidoP.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabelIngApellidoP.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelIngApellidoP.setText("Apellido Materno:");
+        jLabelIngApellidoP.setAlignmentX(0.5F);
+
+        jTextFieldIngIngApellMUsuario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldIngIngApellMUsuario.setAutoscrolls(false);
+        jTextFieldIngIngApellMUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIngIngApellMUsuarioActionPerformed(evt);
+            }
+        });
+
+        jLabelIngCorreo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabelIngCorreo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelIngCorreo.setText("Correo electronico:");
+        jLabelIngCorreo.setAlignmentX(0.5F);
+
+        jTextFieldCorreoUsuario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldCorreoUsuario.setAutoscrolls(false);
+        jTextFieldCorreoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCorreoUsuarioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelEdicionUsersLayout = new javax.swing.GroupLayout(jPanelEdicionUsers);
+        jPanelEdicionUsers.setLayout(jPanelEdicionUsersLayout);
+        jPanelEdicionUsersLayout.setHorizontalGroup(
+            jPanelEdicionUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabelIconUser))
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jTextFieldIngUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabelTipoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jComboBoxTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabelIngNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jTextFieldIngNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabelIngApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jTextFieldIngIngApellPUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabelIngApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jTextFieldIngIngApellMUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabelIngCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jTextFieldCorreoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addComponent(jPanelSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanelEdicionUsersLayout.setVerticalGroup(
+            jPanelEdicionUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelEdicionUsersLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabelIconUser, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jTextFieldIngUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jLabelTipoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jComboBoxTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jLabelIngNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jTextFieldIngNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jLabelIngApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jTextFieldIngIngApellPUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jLabelIngApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jTextFieldIngIngApellMUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jLabelIngCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jTextFieldCorreoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jPanelSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setOpaque(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), "Usuarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.setOpaque(false);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTextFieldBuscarUsuer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldBuscarUsuerKeyTyped(evt);
+            }
+        });
+        jPanel1.add(jTextFieldBuscarUsuer, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 140, 30));
 
         jTableAdminUsers.setBackground(new java.awt.Color(255, 255, 255));
         jTableAdminUsers.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -247,22 +439,26 @@ public class JFAdminUsers extends javax.swing.JFrame {
         jTableAdminUsers.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTableAdminUsers);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 24, 823, 290));
+
+        jLabelIconoBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconoBuscar.png"))); // NOI18N
+        jPanel1.add(jLabelIconoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 319, -1, -1));
+
+        jButtonBorrar.setText("Borrar");
+        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 337, 132, -1));
+
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 337, 132, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -290,7 +486,7 @@ public class JFAdminUsers extends javax.swing.JFrame {
                 .addGroup(jPanelFondoAdminUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelAdminDeUSers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelFondoAdminUsersLayout.createSequentialGroup()
-                        .addComponent(jPanelEdicionUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanelEdicionUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -342,6 +538,127 @@ public class JFAdminUsers extends javax.swing.JFrame {
         jPanelFondoAdminUsers.repaint();
     }//GEN-LAST:event_jPanelFondoAdminUsersPropertyChange
 
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        String userNew = jTextFieldIngNombreUsuario.getText();
+        int cancelar = JOptionPane.showConfirmDialog(null, "¿Actualizar Usuario?", "Modificar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (cancelar == 0) {
+
+            SqlUsuarios modSql = new SqlUsuarios(); //Se creaun nuevo objeto de la clase SqlUsuarios llamadp modSql
+            usuarios mod = new usuarios(); //Se crea un nuevo objeto de la clase usuarios llamado mod
+
+            String nuevoTipoUser = jComboBoxTipoUser.getSelectedItem().toString();
+
+            try {
+                if (jTextFieldIngUsuario.getText().equals("") || jTextFieldIngIngApellPUsuario.getText().equals("") || jTextFieldIngIngApellMUsuario.getText().equals("") || jTextFieldIngNombreUsuario.getText().equals("") || jTextFieldCorreoUsuario.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Debe llenar todos los campos\n¡No se permiten campos vacios!");
+                } else {
+
+                    if (modSql.existeUsuario(jTextFieldIngUsuario.getText()) == 0) {
+                        if (modSql.esEmail(jTextFieldCorreoUsuario.getText())) {
+
+                            if (!nuevoTipoUser.equals("Selecciona")) {
+                                mod.setUsername(jTextFieldIngUsuario.getText());
+                                mod.setEmail_user(jTextFieldCorreoUsuario.getText());
+                                mod.setNombre_user(jTextFieldIngNombreUsuario.getText());
+                                mod.setAp_user(jTextFieldIngIngApellPUsuario.getText());
+                                mod.setAm_user(jTextFieldIngIngApellMUsuario.getText());
+                                mod.setTipo_user(nuevoTipoUser);
+
+                                limpiar();
+
+                                if (modSql.modificarUsers(mod)) {
+                                    JOptionPane.showMessageDialog(null, "El registro fue guardado");
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Error al guardar");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Selecciona el tipo de usuario");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El correo no es valido");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El usuario ya existe");
+                    }
+
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error al guardar\n" + ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No se ha guardado ningun Usuario");
+        }
+    }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void jTextFieldIngUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIngUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIngUsuarioActionPerformed
+
+    private void jTextFieldIngNombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIngNombreUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIngNombreUsuarioActionPerformed
+
+    private void jTextFieldIngIngApellPUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIngIngApellPUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIngIngApellPUsuarioActionPerformed
+
+    private void jTextFieldIngIngApellMUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIngIngApellMUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIngIngApellMUsuarioActionPerformed
+
+    private void jTextFieldCorreoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCorreoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCorreoUsuarioActionPerformed
+
+    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonBorrarActionPerformed
+
+    private void jTextFieldBuscarUsuerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscarUsuerKeyTyped
+        try {
+            DefaultTableModel modelo = new DefaultTableModel();
+            jTableAdminUsers.setModel(modelo);
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+            String busqU = jTextFieldBuscarUsuer.getText();
+
+            String sql = "SELECT USERNAME_US, EMAIL_US, NOMBRE_US, AP_US, AM_US, TIPO_US FROM usuarios WHERE USERNAME_US LIKE '%" + busqU + "%'";
+            
+
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            System.out.println(sql);
+            System.out.println(rs);
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Username");
+            modelo.addColumn("Email");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Apellido Paterno");
+            modelo.addColumn("Apellido Materno");
+            modelo.addColumn("Tipo");
+            while (rs.next()) {
+
+                Object[] filas = new Object[cantidadColumnas];
+
+                for (int i = 0; i < cantidadColumnas; i++) {
+
+                    filas[i] = rs.getObject(i + 1);
+                }
+
+                modelo.addRow(filas);
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error" + ex);
+        }
+    }//GEN-LAST:event_jTextFieldBuscarUsuerKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -356,16 +673,24 @@ public class JFAdminUsers extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFAdminUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFAdminUsers.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFAdminUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFAdminUsers.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFAdminUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFAdminUsers.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFAdminUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFAdminUsers.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -383,11 +708,18 @@ public class JFAdminUsers extends javax.swing.JFrame {
     private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonMenuP;
     private javax.swing.JButton jButtonModificar;
+    private javax.swing.JComboBox<String> jComboBoxTipoUser;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelAdmUsuLogo;
+    private javax.swing.JLabel jLabelIconUser;
     private javax.swing.JLabel jLabelIconoBuscar;
+    private javax.swing.JLabel jLabelIngApellidoM;
+    private javax.swing.JLabel jLabelIngApellidoP;
+    private javax.swing.JLabel jLabelIngCorreo;
+    private javax.swing.JLabel jLabelIngNombre;
+    private javax.swing.JLabel jLabelTipoEmp;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelAdminDeUSers;
@@ -397,5 +729,10 @@ public class JFAdminUsers extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTableAdminUsers;
     private javax.swing.JTextField jTextFieldBuscarUsuer;
+    private javax.swing.JTextField jTextFieldCorreoUsuario;
+    private javax.swing.JTextField jTextFieldIngIngApellMUsuario;
+    private javax.swing.JTextField jTextFieldIngIngApellPUsuario;
+    private javax.swing.JTextField jTextFieldIngNombreUsuario;
+    private javax.swing.JTextField jTextFieldIngUsuario;
     // End of variables declaration//GEN-END:variables
 }
