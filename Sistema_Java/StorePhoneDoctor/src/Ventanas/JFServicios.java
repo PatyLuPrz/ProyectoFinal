@@ -104,6 +104,7 @@ public class JFServicios extends javax.swing.JFrame {
             component.setEnabled(false);
         }
 
+        jButtonFinalizarServicio.setEnabled(false);
         jButtonGuardarS.setEnabled(false);
         jButtonCancelarS.setEnabled(false);
 
@@ -137,6 +138,12 @@ public class JFServicios extends javax.swing.JFrame {
                         jTextFieldTelefonoClienteS.setText(jTableServicios.getValueAt(fila, 6).toString());
                         jTextAreaDescripcionS.setText(jTableServicios.getValueAt(fila, 7).toString());
                         jTextFieldPrecioS.setText(jTableServicios.getValueAt(fila, 8).toString());
+
+                        if (!jTableServicios.getValueAt(fila, 4).toString().equals("En proceso")) {
+                            jButtonFinalizarServicio.setEnabled(false);
+                        } else {
+                            jButtonFinalizarServicio.setEnabled(true);
+                        }
 
                     }
                 } catch (Exception err) {
@@ -207,7 +214,7 @@ public class JFServicios extends javax.swing.JFrame {
         jButtonBuscarServicio = new javax.swing.JButton();
         jComboBoxBuscarServicio = new javax.swing.JComboBox<>();
         jTextFieldBuscarServicio = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonFinalizarServicio = new javax.swing.JButton();
         jPanelTablaClientes1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableClientes = new javax.swing.JTable();
@@ -419,6 +426,11 @@ public class JFServicios extends javax.swing.JFrame {
                 jTextFieldNombreClienteSActionPerformed(evt);
             }
         });
+        jTextFieldNombreClienteS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldNombreClienteSKeyTyped(evt);
+            }
+        });
 
         jLabelNombreClienteS.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelNombreClienteS.setForeground(new java.awt.Color(255, 255, 255));
@@ -450,6 +462,11 @@ public class JFServicios extends javax.swing.JFrame {
 
         jTextAreaDescripcionS.setColumns(20);
         jTextAreaDescripcionS.setRows(5);
+        jTextAreaDescripcionS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextAreaDescripcionSKeyTyped(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTextAreaDescripcionS);
 
         jLabelTelefonoCliente1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -464,6 +481,11 @@ public class JFServicios extends javax.swing.JFrame {
         jTextFieldPrecioS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPrecioSActionPerformed(evt);
+            }
+        });
+        jTextFieldPrecioS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldPrecioSKeyTyped(evt);
             }
         });
 
@@ -690,7 +712,12 @@ public class JFServicios extends javax.swing.JFrame {
 
         jTextFieldBuscarServicio.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
 
-        jButton1.setText("Finalizar Servicio");
+        jButtonFinalizarServicio.setText("Finalizar Servicio");
+        jButtonFinalizarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFinalizarServicioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelTablaClientesLayout = new javax.swing.GroupLayout(jPanelTablaClientes);
         jPanelTablaClientes.setLayout(jPanelTablaClientesLayout);
@@ -707,7 +734,7 @@ public class JFServicios extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldBuscarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonFinalizarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         jPanelTablaClientesLayout.setVerticalGroup(
@@ -717,7 +744,7 @@ public class JFServicios extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelTablaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonFinalizarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldBuscarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxBuscarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBuscarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1012,7 +1039,7 @@ public class JFServicios extends javax.swing.JFrame {
 
     private void jButtonGuardarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarSActionPerformed
 
-        int cancelar = JOptionPane.showConfirmDialog(null, "¿Desea guardar este producto?", "Nuevo Producto", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int cancelar = JOptionPane.showConfirmDialog(null, "¿Almacenar nuevo servicio?", "Servicio", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (cancelar == 0) {
 
             sqlServicios sqlServ = new sqlServicios();
@@ -1183,8 +1210,38 @@ public class JFServicios extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldFechaEntradaSKeyTyped
 
     private void jTextFieldTelefonoClienteSKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTelefonoClienteSKeyTyped
-        // TODO add your handling code here:
+        String Caracteres = jTextFieldTelefonoClienteS.getText();
+        if (Caracteres.length() > 19) {
+            evt.consume();
+        }
     }//GEN-LAST:event_jTextFieldTelefonoClienteSKeyTyped
+
+    private void jTextFieldPrecioSKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPrecioSKeyTyped
+        if (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '.') {
+            evt.consume();
+        }
+        if (evt.getKeyChar() == '.' && jTextFieldPrecioS.getText().contains(".")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldPrecioSKeyTyped
+
+    private void jTextFieldNombreClienteSKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreClienteSKeyTyped
+        String Caracteres = jTextFieldNombreClienteS.getText();
+        if (Caracteres.length() > 59) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldNombreClienteSKeyTyped
+
+    private void jTextAreaDescripcionSKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaDescripcionSKeyTyped
+        String Caracteres = jTextAreaDescripcionS.getText();
+        if (Caracteres.length() > 249) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextAreaDescripcionSKeyTyped
+
+    private void jButtonFinalizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarServicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonFinalizarServicioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1227,13 +1284,13 @@ public class JFServicios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel TIPODEUSUARIOPRODUCTOS;
     public javax.swing.JLabel USUARIOPRODUCTOS;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonActualizarS;
     private javax.swing.JButton jButtonBorrarS;
     private javax.swing.JButton jButtonBuscarClienteV;
     private javax.swing.JButton jButtonBuscarServicio;
     private javax.swing.JButton jButtonCancelarS;
     private javax.swing.JButton jButtonClientes;
+    private javax.swing.JButton jButtonFinalizarServicio;
     private javax.swing.JButton jButtonGuardarS;
     private javax.swing.JButton jButtonNuevoS;
     private javax.swing.JButton jButtonProductos;

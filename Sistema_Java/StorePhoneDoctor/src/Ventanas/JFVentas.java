@@ -143,9 +143,9 @@ public class JFVentas extends javax.swing.JFrame {
         initComponents();
         tablaConsultaClientes();
         tablaConsultaProductos();
-        
+
         setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
-        
+
         jLabelClienteVenta.setText("Publico General");
         /*Fondo de Menu Secundario*/
         ImageIcon imagenLogo = new ImageIcon(getClass().getResource("/Images/LogoPrincipal.png"));
@@ -163,6 +163,7 @@ public class JFVentas extends javax.swing.JFrame {
         jButtonQuitarProd.setEnabled(false);
         jButtonAgregarProd.setEnabled(false);
         jSpinner1.setEnabled(false);
+        jTextFieldDescuentoPCantidad.setEnabled(false);
 
         for (Component component : jPanelTablaClientes.getComponents()) {
             jTableClientes.setEnabled(false);
@@ -231,9 +232,11 @@ public class JFVentas extends javax.swing.JFrame {
         jLabelProductoV1 = new javax.swing.JLabel();
         jButtonIniciarVenta = new javax.swing.JButton();
         jLabelDescuento = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxDescuento = new javax.swing.JComboBox<>();
         jLabelDescuentoPCantidad = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        jTextFieldDescuentoPCantidad = new javax.swing.JTextField();
+        jLabelProductoPrecioLabel = new javax.swing.JLabel();
+        jLabelProductoPrecio = new javax.swing.JLabel();
         jPanelTablaVenta2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -587,11 +590,26 @@ public class JFVentas extends javax.swing.JFrame {
         jLabelDescuento.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDescuento.setText("Descuento:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Descuento", "Descuento por cantidad", "%5", "%10", "%15", "%20", "%30", "%40", "%50", "%60", "%70" }));
+        jComboBoxDescuento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Descuento", "Descuento por cantidad", "%5", "%10", "%15", "%20", "%30", "%40", "%50", "%60", "%70" }));
+        jComboBoxDescuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDescuentoActionPerformed(evt);
+            }
+        });
 
         jLabelDescuentoPCantidad.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabelDescuentoPCantidad.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDescuentoPCantidad.setText("D.p. cantidad:");
+
+        jLabelProductoPrecioLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabelProductoPrecioLabel.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelProductoPrecioLabel.setText("Precio:");
+
+        jLabelProductoPrecio.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabelProductoPrecio.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelProductoPrecio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabelProductoPrecio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelProductoPrecio.setPreferredSize(new java.awt.Dimension(14, 24));
 
         javax.swing.GroupLayout jPanelTablaVentaLayout = new javax.swing.GroupLayout(jPanelTablaVenta);
         jPanelTablaVenta.setLayout(jPanelTablaVentaLayout);
@@ -623,8 +641,12 @@ public class JFVentas extends javax.swing.JFrame {
                             .addComponent(jLabelDescuentoPCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField7)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jTextFieldDescuentoPCantidad)
+                            .addComponent(jComboBoxDescuento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTablaVentaLayout.createSequentialGroup()
+                        .addComponent(jLabelProductoPrecioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelProductoPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelTablaVentaLayout.setVerticalGroup(
@@ -632,34 +654,38 @@ public class JFVentas extends javax.swing.JFrame {
             .addGroup(jPanelTablaVentaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelFolioV, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldFolioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelFolioV, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldFolioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelFechaV, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelFechaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelFechaV, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelFechaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelProductoV, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelProductoAVender, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelClienteV, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelClienteVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelProductoV1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelClienteV, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelClienteVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDescuentoPCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelProductoV, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelProductoAVender, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonIniciarVenta)
+                .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelProductoV1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelProductoPrecioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelProductoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDescuentoPCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldDescuentoPCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonIniciarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1048,7 +1074,7 @@ public class JFVentas extends javax.swing.JFrame {
                         .addGroup(jLayeredPaneVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonCancelarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonRealizarCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ventas", jLayeredPaneVentas);
@@ -1328,7 +1354,7 @@ public class JFVentas extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cajas", jLayeredPaneCajas);
@@ -1460,7 +1486,7 @@ public class JFVentas extends javax.swing.JFrame {
                     .addComponent(jTextFieldBuscarHistorialDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBuscarHistorialDevoluciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1602,7 +1628,7 @@ public class JFVentas extends javax.swing.JFrame {
                     .addComponent(jComboBoxSeleccionaHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldBuscarHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2046,6 +2072,7 @@ public class JFVentas extends javax.swing.JFrame {
                             int fila = jTableInventarioVenta.getSelectedRow();
 
                             jLabelProductoAVender.setText(jTableInventarioVenta.getValueAt(fila, 0).toString());
+                            jTextFieldDescuentoPCantidad.setText(jTableInventarioVenta.getValueAt(fila, 5).toString());
 
                         }
                     } catch (Exception err) {
@@ -2102,6 +2129,67 @@ public class JFVentas extends javax.swing.JFrame {
     private void jTabbedPane1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1PropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_jTabbedPane1PropertyChange
+
+    private void jComboBoxDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDescuentoActionPerformed
+        int descuentoP = jComboBoxDescuento.getSelectedIndex();
+        double descuentoPCantidad = Double.parseDouble(jTextFieldDescuentoPCantidad.getText().toString());
+        String precioFinal = null;
+        double descuento = 0.0;
+        switch (descuentoP) {
+            case 0:
+                jLabelProductoPrecio.setText(jTextFieldDescuentoPCantidad.getText());
+                break;
+            case 1:
+                jTextFieldDescuentoPCantidad.setEnabled(true);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                precioFinal = Double.toString(descuento);
+                break;
+            case 2:
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                precioFinal = Double.toString(descuento);
+                break;
+            case 3:
+                jTextFieldDescuentoPCantidad.setEnabled(true);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                precioFinal = Double.toString(descuento);
+                break;
+            case 4:
+                jTextFieldDescuentoPCantidad.setEnabled(true);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                precioFinal = Double.toString(descuento);
+                break;
+            case 5:
+                jTextFieldDescuentoPCantidad.setEnabled(true);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                precioFinal = Double.toString(descuento);
+                break;
+            case 6:
+                jTextFieldDescuentoPCantidad.setEnabled(true);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                precioFinal = Double.toString(descuento);
+                break;
+            case 7:
+                jTextFieldDescuentoPCantidad.setEnabled(true);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                precioFinal = Double.toString(descuento);
+                break;
+            case 8:
+                jTextFieldDescuentoPCantidad.setEnabled(true);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                precioFinal = Double.toString(descuento);
+                break;
+            case 9:
+                jTextFieldDescuentoPCantidad.setEnabled(true);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                precioFinal = Double.toString(descuento);
+                break;
+            case 10:
+                jTextFieldDescuentoPCantidad.setEnabled(true);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                precioFinal = Double.toString(descuento);
+                break;
+        }
+    }//GEN-LAST:event_jComboBoxDescuentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2167,7 +2255,7 @@ public class JFVentas extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRealizarVenta;
     private javax.swing.JButton jButtonServicios;
     private javax.swing.JButton jButtonVentas;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxDescuento;
     private javax.swing.JComboBox<String> jComboBoxSeleccionaDevolucion;
     private javax.swing.JComboBox<String> jComboBoxSeleccionaHistorial;
     private javax.swing.JComboBox<String> jComboBoxTipoBusqProd;
@@ -2193,6 +2281,8 @@ public class JFVentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelFolioV;
     private javax.swing.JLabel jLabelLogoMenu;
     public javax.swing.JLabel jLabelProductoAVender;
+    public javax.swing.JLabel jLabelProductoPrecio;
+    private javax.swing.JLabel jLabelProductoPrecioLabel;
     private javax.swing.JLabel jLabelProductoV;
     private javax.swing.JLabel jLabelProductoV1;
     private javax.swing.JLabel jLabelTotalImport;
@@ -2239,11 +2329,11 @@ public class JFVentas extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextFieldBuscarClienteV;
     private javax.swing.JTextField jTextFieldBuscarHistorial;
     private javax.swing.JTextField jTextFieldBuscarHistorialDevolucion;
     private javax.swing.JTextField jTextFieldBuscarProd;
+    private javax.swing.JTextField jTextFieldDescuentoPCantidad;
     private javax.swing.JTextField jTextFieldFolioVenta;
     private javax.swing.JTextField jTextFieldPagado;
     private javax.swing.JToggleButton jToggleButton1;

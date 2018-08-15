@@ -1,13 +1,5 @@
-create database storephonedoctor;
-use storephonedoctor;
--- phpMyAdmin SQL Dump
--- version 4.8.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 15-08-2018 a las 01:29:20
--- Versión del servidor: 10.1.33-MariaDB
--- Versión de PHP: 7.2.6
+CREATE DATABASE storephonedoctor;
+USE storephonedoctor;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,7 +13,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `spd`
+-- Base de datos: `storephonedoctor`
 --
 
 -- --------------------------------------------------------
@@ -40,6 +32,14 @@ CREATE TABLE `clientes` (
   `TEL_CL` varchar(15) NOT NULL,
   `MUN_CL` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='REGISTRO DE CLIENTES FRECUENTES';
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`USERNAME_CL`, `EMAIL_CL`, `CONTRASENA_CL`, `NOMBRE_CL`, `AP_CL`, `AM_CL`, `TEL_CL`, `MUN_CL`) VALUES
+('Josejose', 'jose@gmail.com', 'Josejose', 'Jose', 'Ramirez', 'Soto', '7751230748', 'Tulancingo'),
+('NorbertoPaloma', 'luis@gmail.com', '66f4501149cbc7d3a40f3be7dce4b4b970666649', 'Luis', 'Rodriguez', 'Rodriguez', '7751284715', 'Tulancingo');
 
 -- --------------------------------------------------------
 
@@ -71,6 +71,15 @@ CREATE TABLE `productos` (
   `DESCRIPCION_P` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='REGISTRO DEL INVENTARIO';
 
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`CODIGO_P`, `NOMBRE_P`, `CATEGORIA_P`, `MARCA_P`, `CANTIDAD_P`, `PRECIO_VENTA_P`, `PRECIO_COMPRA_P`, `IMG_P`, `DESCRIPCION_P`) VALUES
+('0000000000001', 'Mica Iphone 7/8', 'Mica de Vidrio ', 'Generico', 10, 50, 30, NULL, NULL),
+('0000000000002', 'Funda Tab 3 Samsung 360 7\" ', 'Funda', 'Generica', 5, 150, 100, NULL, NULL),
+('0000000000003', 'Funda 360 Tab A 7\"', 'Funda', 'Samsung', 5, 150, 100, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -81,13 +90,21 @@ CREATE TABLE `servicios` (
   `FOLIO_S` varchar(10) NOT NULL,
   `USERNAME_US` varchar(20) NOT NULL,
   `USERNAME_CL` varchar(50) NOT NULL,
-  `FECHALLEGADA_S` varchar(10) NOT NULL,
-  `FECHASALIDA_S` varchar(10) DEFAULT NULL,
+  `FECHALLEGADA_S` varchar(15) NOT NULL,
+  `FECHASALIDA_S` varchar(15) DEFAULT NULL,
   `NOMBRECLIENTE_S` varchar(60) NOT NULL,
   `TELEFONOCLIENTE_S` varchar(20) NOT NULL,
   `DESCRIPCION_S` varchar(250) NOT NULL,
-  `PRECIO_S` float NOT NULL
+  `PRECIO_S` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='BITACORA DE SERVICIOS';
+
+--
+-- Volcado de datos para la tabla `servicios`
+--
+
+INSERT INTO `servicios` (`FOLIO_S`, `USERNAME_US`, `USERNAME_CL`, `FECHALLEGADA_S`, `FECHASALIDA_S`, `NOMBRECLIENTE_S`, `TELEFONOCLIENTE_S`, `DESCRIPCION_S`, `PRECIO_S`) VALUES
+('0000000001', 'Administrador', 'Publico General', '2018-08-14', 'En proceso', 'Jose Ramirez Soto', '7759876543', 'Liberacion Iphone 6 Dorado At&t', 2000),
+('0000000002', 'Administrador', 'Josejose', '2018-08-14', 'En proceso', 'Jose Ramirez Soto', '7759876543', 'Liberacion Iphone 6 Dorado At&t', 2000);
 
 -- --------------------------------------------------------
 
@@ -97,7 +114,7 @@ CREATE TABLE `servicios` (
 --
 CREATE TABLE `servicios_no_adm` (
 `FOLIO_S` varchar(10)
-,`FECHALLEGADA_S` varchar(10)
+,`FECHALLEGADA_S` varchar(15)
 ,`NOMBRECLIENTE_S` varchar(60)
 ,`TELEFONOCLIENTE_S` varchar(20)
 ,`DESCRIPCION_S` varchar(250)
@@ -111,7 +128,7 @@ CREATE TABLE `servicios_no_adm` (
 --
 CREATE TABLE `servicios_no_adm_dos` (
 `FOLIO_S` varchar(10)
-,`FECHALLEGADA_S` varchar(10)
+,`FECHALLEGADA_S` varchar(15)
 ,`NOMBRE_CL` varchar(30)
 );
 
@@ -130,6 +147,13 @@ CREATE TABLE `usuarios` (
   `AM_US` varchar(30) NOT NULL,
   `TIPO_US` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='REGISTRO DE USUARIOS DEL SISTEMA';
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`USERNAME_US`, `EMAIL_US`, `CONTRASENA_US`, `NOMBRE_US`, `AP_US`, `AM_US`, `TIPO_US`) VALUES
+('Administrador', 'luis_norberto1998@hotmail.com', '435b41068e8665513a20070c033b08b9c66e4332', 'Norberto', 'Paloma', 'Rodriguez', 'Administrador');
 
 -- --------------------------------------------------------
 

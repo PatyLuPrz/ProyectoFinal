@@ -176,8 +176,6 @@ public class JFProductos extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableInventario = new javax.swing.JTable();
-        jButtonVistaPrevia = new javax.swing.JButton();
-        jButtonLimpiar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButtonCancelarP = new javax.swing.JButton();
         jButtonNuevoP = new javax.swing.JButton();
@@ -187,10 +185,6 @@ public class JFProductos extends javax.swing.JFrame {
         JButtonBuscarPr = new javax.swing.JButton();
         jComboBoxTipoBusqPr = new javax.swing.JComboBox<>();
         jTextFieldBuscarPr = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        jLabelInsertarImagen = new javax.swing.JLabel();
-        jTextFieldRutaFoto = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jPanelMenuSecundario = new javax.swing.JPanel();
         jLabelLogoMenu = new javax.swing.JLabel();
         jButtonVentas = new javax.swing.JButton();
@@ -357,7 +351,7 @@ public class JFProductos extends javax.swing.JFrame {
                     .addComponent(jTextFieldCantidadPr)
                     .addComponent(jTextFieldPrecioCompraPr)
                     .addComponent(jTextFieldNombrePr)
-                    .addComponent(jComboBoxCategoriasPr, 0, 239, Short.MAX_VALUE)
+                    .addComponent(jComboBoxCategoriasPr, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldCodigoPr)
                     .addComponent(jTextFieldPrecioVentaPr, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -371,31 +365,31 @@ public class JFProductos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelCodigoPr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(3, 3, 3)))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNombrePr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNombrePr, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxCategoriasPr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCategoriaPr, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldMarcaP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldCantidadPr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCantidadPr, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldPrecioCompraPr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelPrecioCompraPr, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldPrecioVentaPr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelPrecioVentaPr, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Inventario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -467,7 +461,7 @@ public class JFProductos extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -476,15 +470,6 @@ public class JFProductos extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        jButtonVistaPrevia.setText("Buscar Imagen");
-        jButtonVistaPrevia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVistaPreviaActionPerformed(evt);
-            }
-        });
-
-        jButtonLimpiar.setText("Limpiar");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Edicion Productos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel3.setOpaque(false);
@@ -546,17 +531,17 @@ public class JFProductos extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonNuevoP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jButtonGuardarP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jButtonCancelarP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jButtonActualizarP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jButtonBorrarP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jButtonNuevoP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonGuardarP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonCancelarP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonActualizarP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonBorrarP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         JButtonBuscarPr.setText("Buscar");
@@ -567,44 +552,6 @@ public class JFProductos extends javax.swing.JFrame {
         });
 
         jComboBoxTipoBusqPr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona", "Codigo", "Nombre", "Categoria", "Marca", "Cantidad", "Precio Compra", "Precio Venta" }));
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), "Imagen", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 14))); // NOI18N
-        jPanel4.setOpaque(false);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelInsertarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabelInsertarImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jTextFieldRutaFoto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextFieldRutaFoto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldRutaFotoActionPerformed(evt);
-            }
-        });
-        jTextFieldRutaFoto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFieldRutaFotoKeyTyped(evt);
-            }
-        });
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanelInterfaceProductosLayout = new javax.swing.GroupLayout(jPanelInterfaceProductos);
         jPanelInterfaceProductos.setLayout(jPanelInterfaceProductosLayout);
@@ -618,48 +565,30 @@ public class JFProductos extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanelInterfaceProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelInterfaceProductosLayout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanelInterfaceProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButtonLimpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButtonVistaPrevia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldRutaFoto)
-                                    .addComponent(jButton1)))
-                            .addGroup(jPanelInterfaceProductosLayout.createSequentialGroup()
-                                .addComponent(JButtonBuscarPr)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxTipoBusqPr, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldBuscarPr, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(JButtonBuscarPr, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelInterfaceProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jComboBoxTipoBusqPr, javax.swing.GroupLayout.Alignment.TRAILING, 0, 166, Short.MAX_VALUE)
+                                .addComponent(jTextFieldBuscarPr, javax.swing.GroupLayout.Alignment.TRAILING)))))
                 .addContainerGap())
         );
         jPanelInterfaceProductosLayout.setVerticalGroup(
             jPanelInterfaceProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInterfaceProductosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelInterfaceProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelInterfaceProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 315, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelInterfaceProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelInterfaceProductosLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addGroup(jPanelInterfaceProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanelInterfaceProductosLayout.createSequentialGroup()
-                                .addComponent(jTextFieldRutaFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonVistaPrevia, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1))
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanelInterfaceProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JButtonBuscarPr)
-                            .addComponent(jComboBoxTipoBusqPr, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldBuscarPr, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(JButtonBuscarPr)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxTipoBusqPr, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldBuscarPr, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1143,14 +1072,17 @@ public class JFProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCantidadPrKeyTyped
 
     private void jButtonNuevoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoPActionPerformed
-        jButtonGuardarP.setEnabled(true);
-        jButtonCancelarP.setEnabled(true);
-        jButtonActualizarP.setEnabled(false);
-        jButtonBorrarP.setEnabled(false);
+        int cancelar = JOptionPane.showConfirmDialog(null, "Agregar Nuevo Producto", "Nuevo Producto", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (cancelar == 0) {
+            jButtonGuardarP.setEnabled(true);
+            jButtonCancelarP.setEnabled(true);
+            jButtonActualizarP.setEnabled(false);
+            jButtonBorrarP.setEnabled(false);
+        }
     }//GEN-LAST:event_jButtonNuevoPActionPerformed
 
     private void jButtonCancelarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarPActionPerformed
-        int cancelar = JOptionPane.showConfirmDialog(null, "¿Desea cancelar el registro del producto?", "Nuevo Producto", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int cancelar = JOptionPane.showConfirmDialog(null, "¿Desea cancelar el registro del producto?", "Salir", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (cancelar == 0) {
             jButtonGuardarP.setEnabled(false);
             jButtonCancelarP.setEnabled(false);
@@ -1159,45 +1091,6 @@ public class JFProductos extends javax.swing.JFrame {
             limpiarCampos();
         }
     }//GEN-LAST:event_jButtonCancelarPActionPerformed
-
-    private void jButtonVistaPreviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVistaPreviaActionPerformed
-        //Creamos un objeto de JFileChooser
-        JFileChooser dlg = new JFileChooser();
-
-        //Del objeto creado  vamos a llamar al metodo SetFileFilter
-        dlg.setFileFilter(filter);
-
-        //Abriremos la ventana de dialogo para escoger las imagenes
-        int option = dlg.showOpenDialog(this);
-        //Si hacemos click en el boton abrir
-        if (option == JFileChooser.APPROVE_OPTION) {
-            //Obtener el nombre del archivo que hemos seleccionado
-            String fil = dlg.getSelectedFile().getPath();
-            //Obtener la direccion donde se guardara la imagen
-            String file = dlg.getSelectedFile().toString();
-            jLabelInsertarImagen.setIcon(new ImageIcon(fil));
-            //Modificamos la imagen
-            ImageIcon icon = new ImageIcon(fil);
-            //Extraer la imagen del icono
-            Image img = icon.getImage();
-            //Cambiando tamaño de la imagen
-            Image newimg = img.getScaledInstance(239, 174, java.awt.Image.SCALE_SMOOTH);
-            //Se genera el image icon con la nueva imagen
-            ImageIcon newIcon = new ImageIcon(newimg);
-            jLabelInsertarImagen.setIcon(newIcon);
-            jLabelInsertarImagen.setSize(155, 175);
-            jTextFieldRutaFoto.setText(fil);
-            rutaImagen = "";
-        }
-    }//GEN-LAST:event_jButtonVistaPreviaActionPerformed
-
-    private void jTextFieldRutaFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRutaFotoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldRutaFotoActionPerformed
-
-    private void jTextFieldRutaFotoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldRutaFotoKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldRutaFotoKeyTyped
 
     private void jTextFieldCodigoPrKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCodigoPrKeyTyped
         String Caracteres = jTextFieldCodigoPr.getText();
@@ -1256,7 +1149,7 @@ public class JFProductos extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "");
+            JOptionPane.showMessageDialog(null, "No se actualizo ningun producto");
         }
     }//GEN-LAST:event_jButtonActualizarPActionPerformed
 
@@ -1282,11 +1175,6 @@ public class JFProductos extends javax.swing.JFrame {
         } else {
         }
     }//GEN-LAST:event_jButtonBorrarPActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        recuperarTabla();
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1336,18 +1224,15 @@ public class JFProductos extends javax.swing.JFrame {
     public javax.swing.JButton JButtonBuscarPr;
     public javax.swing.JLabel TIPODEUSUARIOPRODUCTOS;
     public javax.swing.JLabel USUARIOPRODUCTOS;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonActualizarP;
     private javax.swing.JButton jButtonBorrarP;
     private javax.swing.JButton jButtonCancelarP;
     private javax.swing.JButton jButtonClientes;
     private javax.swing.JButton jButtonGuardarP;
-    private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonNuevoP;
     private javax.swing.JButton jButtonProductos;
     private javax.swing.JButton jButtonServicios;
     private javax.swing.JButton jButtonVentas;
-    private javax.swing.JButton jButtonVistaPrevia;
     private javax.swing.JComboBox<String> jComboBoxCategoriasPr;
     private javax.swing.JComboBox<String> jComboBoxTipoBusqPr;
     private javax.swing.JLabel jLabel3;
@@ -1355,7 +1240,6 @@ public class JFProductos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCantidadPr;
     private javax.swing.JLabel jLabelCategoriaPr;
     private javax.swing.JLabel jLabelCodigoPr;
-    private javax.swing.JLabel jLabelInsertarImagen;
     private javax.swing.JLabel jLabelLogoMenu;
     private javax.swing.JLabel jLabelMarca;
     private javax.swing.JLabel jLabelNombrePr;
@@ -1369,7 +1253,6 @@ public class JFProductos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanelInterfaceProductos;
     private javax.swing.JPanel jPanelMenuSecundario;
@@ -1382,7 +1265,6 @@ public class JFProductos extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNombrePr;
     private javax.swing.JTextField jTextFieldPrecioCompraPr;
     private javax.swing.JTextField jTextFieldPrecioVentaPr;
-    public javax.swing.JTextField jTextFieldRutaFoto;
     // End of variables declaration//GEN-END:variables
 
     private void setBorder(Object object) {
