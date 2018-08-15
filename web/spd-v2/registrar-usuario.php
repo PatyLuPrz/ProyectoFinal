@@ -37,49 +37,7 @@
 				
         </style>    
 </head>
-
-<body class="" style="background-image: url('img/FondoPrograma.png');background-repeat:no-repeat;">
-  <div class="p-4">
-    <div class="container">
-      <div class="row"></div>
-    </div>
-  </div>
-  <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand align-items-center align-self-center" href="#">
-        <img src="C:/Users/TeddyBear/Documents/TIC32/Proyecto/storephonedoctor/img/logo (2).png" width="50
-30
-30" height="80" class="d-inline-block align-top float-left img-fluid" alt="">
-        <b class="h1 - align-items-center align-self-center justify-content-center">&nbsp;&nbsp;StorePhone Doctor&nbsp;
-          <br> </b>
-      </a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fa d-inline fa-lg fa-bookmark-o"></i> Acerca de...</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fa d-inline fa-lg fa-envelope-o"></i> Contactanos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fa fa-cart-arrow-down fa-lg d-inline"></i>&nbsp;Productos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fa fa-home fa-lg d-inline"></i>&nbsp;Inicio</a>
-          </li>
-        </ul>
-        <a class="btn navbar-btn ml-2 text-white btn-secondary">
-          <i class="fa d-inline fa-lg fa-user-circle-o"></i> Cuenta</a>
-      </div>
-    </div>
-  </nav>
+<?php include("includes/nav.php"); ?>
   <div class="py-5">
     <div class="container">
       <div class="row">
@@ -150,48 +108,7 @@ $buscarEmail = "SELECT * FROM $tbl_name
 ?>
 
                 
-                
-                
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-5 bg-dark text-white">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9">
-          <p class="lead">Registrate para tener acceso a nuestras ofertas especiales</p>
-          <form class="form-inline">
-            <div class="form-group">
-              <input type="email" class="form-control" placeholder="Your e-mail here"> </div>
-            <button type="submit" class="btn btn-primary ml-3">Subscribe</button>
-          </form>
-        </div>
-        <div class="col-4 col-md-1 align-self-center">
-          <a href="https://www.facebook.com" target="_blank">
-            <i class="fa fa-fw fa-facebook fa-3x text-white"></i>
-          </a>
-        </div>
-        <div class="col-4 col-md-1 align-self-center">
-          <a href="https://twitter.com" target="_blank">
-            <i class="fa fa-fw fa-twitter fa-3x text-white"></i>
-          </a>
-        </div>
-        <div class="col-4 col-md-1 align-self-center">
-          <a href="https://www.instagram.com" target="_blank">
-            <i class="fa fa-fw fa-instagram text-white fa-3x"></i>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 mt-3 text-center">
-          <p>© Copyright 2017 StorePhone Doctor - Todos los derechos reservados.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+<?php include("includes/foot.php"); ?>  
 </body>
 
 </html>

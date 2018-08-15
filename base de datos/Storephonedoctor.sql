@@ -194,8 +194,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`USERNAME_CL`),
-  ADD UNIQUE KEY `EMAIL_CL` (`EMAIL_CL`);
+  ADD PRIMARY KEY (`USERNAME_CL`);
 
 --
 -- Indices de la tabla `productos`
