@@ -104,7 +104,7 @@ public class JFProductos extends javax.swing.JFrame {
         rutaImagen = "";
         jButtonGuardarP.setEnabled(false);
         jButtonCancelarP.setEnabled(false);
-        
+
         setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
 
         ImageIcon imagenLogo = new ImageIcon(getClass().getResource("/Images/LogoPrincipal.png"));
@@ -962,8 +962,9 @@ public class JFProductos extends javax.swing.JFrame {
                     produ.setPrecio_venta_prod(Double.parseDouble(jTextFieldPrecioVentaPr.getText()));
                     produ.setPrecio_compra_prod(Double.parseDouble(jTextFieldPrecioCompraPr.getText()));
                     if (sqlPro.registrarProd(produ)) {
-                        tablaConsulta();
                         limpiarCampos();
+                        tablaConsulta();
+
                         JOptionPane.showMessageDialog(null, "El registro fue guardado");
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al guardar");

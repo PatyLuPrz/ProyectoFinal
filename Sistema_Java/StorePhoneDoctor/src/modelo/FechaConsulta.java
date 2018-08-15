@@ -16,7 +16,7 @@ public class FechaConsulta {
 
     public static String fechaactual() {
         Date fecha = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(fecha);
     }
 }

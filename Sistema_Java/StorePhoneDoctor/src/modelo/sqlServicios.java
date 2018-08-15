@@ -16,7 +16,7 @@ public class sqlServicios extends Conexion {
     public boolean registrarServicio(servicios ser) {
         PreparedStatement ps = null; //variable de Statement
         Connection con = (Connection) getConexion(); //Se obtiene la conexion para la clase
-        String sql = "INSERT INTO servicios (FOLIO_S, USERNAME_US, USERNAME_CL, NOMBRECLIENTE_S, TELEFONOCLIENTE_S, DESCRIPCION_S, PRECIO_S) VALUES(?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO servicios (FOLIO_S, USERNAME_US, USERNAME_CL, FECHALLEGADA_S, FECHASALIDA_S, NOMBRECLIENTE_S, TELEFONOCLIENTE_S, DESCRIPCION_S, PRECIO_S) VALUES(?,?,?,?,?,?,?,?,?)";
         try {
 
             ps = (PreparedStatement) con.prepareStatement(sql);
@@ -24,10 +24,11 @@ public class sqlServicios extends Conexion {
             ps.setString(2, ser.getUsername_serv_users());
             ps.setString(3, ser.getUsername_serv_clien());
             ps.setString(4, ser.getFecha_llegada_serv());
-            ps.setString(5, ser.getNombre_cliente_serv());
-            ps.setString(6, ser.getTelefono_cliente_serv());
-            ps.setString(7, ser.getDescripcion_serv());
-            ps.setDouble(8, ser.getPrecio_serv());
+            ps.setString(5, ser.getFecha_salida_serv());
+            ps.setString(6, ser.getNombre_cliente_serv());
+            ps.setString(7, ser.getTelefono_cliente_serv());
+            ps.setString(8, ser.getDescripcion_serv());
+            ps.setDouble(9, ser.getPrecio_serv());
             ps.executeUpdate();
             System.out.println(ps);
             return true;

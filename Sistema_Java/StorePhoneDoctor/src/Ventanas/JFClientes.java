@@ -77,9 +77,9 @@ public class JFClientes extends javax.swing.JFrame {
         tablaConsulta();
         jButtonGuardarC.setEnabled(false);
         jButtonCancelarC.setEnabled(false);
-        
+
         setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
-        
+
         ImageIcon imagenLogo = new ImageIcon(getClass().getResource("/Images/LogoPrincipal.png"));
         Image fondoLogo = imagenLogo.getImage().getScaledInstance(jLabelLogoMenu.getWidth(), jLabelLogoMenu.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscaladoLogo = new ImageIcon(fondoLogo);
@@ -158,8 +158,6 @@ public class JFClientes extends javax.swing.JFrame {
         jLabelEmailCliente1 = new javax.swing.JLabel();
         jTextFieldUsernameClien = new javax.swing.JTextField();
         jLabelEmailCliente2 = new javax.swing.JLabel();
-        jLabelEmailCliente3 = new javax.swing.JLabel();
-        jPasswordFieldConfPasswdC = new javax.swing.JPasswordField();
         jPasswordFieldPasswdC = new javax.swing.JPasswordField();
         jPanelTablaClientes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -354,26 +352,51 @@ public class JFClientes extends javax.swing.JFrame {
         jLabelEmailCliente.setText("E-mail:");
 
         jTextFieldEmailC.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldEmailC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldEmailCKeyTyped(evt);
+            }
+        });
 
         jTextFieldNombreC.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldNombreC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldNombreCKeyTyped(evt);
+            }
+        });
 
         jLabelNombreCliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelNombreCliente.setForeground(new java.awt.Color(255, 255, 255));
         jLabelNombreCliente.setText("Nombre:");
 
         jTextFieldApellidoPC.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldApellidoPC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldApellidoPCKeyTyped(evt);
+            }
+        });
 
         jLabelApellidoPaCliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelApellidoPaCliente.setForeground(new java.awt.Color(255, 255, 255));
         jLabelApellidoPaCliente.setText("Apellido Paterno:");
 
         jTextFieldApellidoMC.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldApellidoMC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldApellidoMCKeyTyped(evt);
+            }
+        });
 
         jLabelApellidoMatCliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelApellidoMatCliente.setForeground(new java.awt.Color(255, 255, 255));
         jLabelApellidoMatCliente.setText("Apellido Materno:");
 
         jTextFieldMunicipioC.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldMunicipioC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldMunicipioCKeyTyped(evt);
+            }
+        });
 
         jLabelDireccionCliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelDireccionCliente.setForeground(new java.awt.Color(255, 255, 255));
@@ -384,20 +407,33 @@ public class JFClientes extends javax.swing.JFrame {
         jLabelTelefonoCliente.setText("Telefono:");
 
         jTextFieldTelefonoC.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldTelefonoC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldTelefonoCKeyTyped(evt);
+            }
+        });
 
         jLabelEmailCliente1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelEmailCliente1.setForeground(new java.awt.Color(255, 255, 255));
         jLabelEmailCliente1.setText("Username:");
 
         jTextFieldUsernameClien.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldUsernameClien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldUsernameClienKeyTyped(evt);
+            }
+        });
 
         jLabelEmailCliente2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelEmailCliente2.setForeground(new java.awt.Color(255, 255, 255));
         jLabelEmailCliente2.setText("Contraseña:");
 
-        jLabelEmailCliente3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabelEmailCliente3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelEmailCliente3.setText("Confirmar Contraseña:");
+        jPasswordFieldPasswdC.setEnabled(false);
+        jPasswordFieldPasswdC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordFieldPasswdCKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -410,14 +446,12 @@ public class JFClientes extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelEmailCliente)
                             .addComponent(jLabelEmailCliente1)
-                            .addComponent(jLabelEmailCliente2)
-                            .addComponent(jLabelEmailCliente3))
-                        .addGap(28, 28, 28)
+                            .addComponent(jLabelEmailCliente2))
+                        .addGap(101, 101, 101)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldEmailC)
                             .addComponent(jTextFieldUsernameClien)
-                            .addComponent(jPasswordFieldConfPasswdC, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                            .addComponent(jPasswordFieldPasswdC)))
+                            .addComponent(jPasswordFieldPasswdC, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelNombreCliente)
@@ -451,11 +485,7 @@ public class JFClientes extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEmailCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPasswordFieldPasswdC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEmailCliente3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordFieldConfPasswdC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombreCliente)
                     .addComponent(jTextFieldNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -470,12 +500,12 @@ public class JFClientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextFieldTelefonoC)
-                    .addComponent(jLabelTelefonoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextFieldMunicipioC)
-                    .addComponent(jLabelDireccionCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jLabelDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelTablaClientes.setBackground(new java.awt.Color(255, 255, 255));
@@ -595,7 +625,7 @@ public class JFClientes extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jButtonNuevoC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonGuardarC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -605,7 +635,7 @@ public class JFClientes extends javax.swing.JFrame {
                 .addComponent(jButtonActualizarC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonBorrarC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jButtonBuscarClientes.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
@@ -774,21 +804,18 @@ public class JFClientes extends javax.swing.JFrame {
             SqlClientes modSql = new SqlClientes(); //Se creaun nuevo objeto de la clase SqlUsuarios llamadp modSql
             clientes mod = new clientes(); //Se crea un nuevo objeto de la clase usuarios llamado mod
 
-            String pass = new String(jPasswordFieldPasswdC.getPassword()); //Se crea una nueva variable String para extraer la contraseña ingresada en el textField
-            String passcon = new String(jPasswordFieldConfPasswdC.getPassword()); //Nueva variable para extraer el texto del TextField
-
             try {
-                if (pass.equals("") || jTextFieldUsernameClien.getText().equals("") || jTextFieldEmailC.getText().equals("") || jPasswordFieldPasswdC.getText().equals("") || jPasswordFieldConfPasswdC.getText().equals("") || jTextFieldNombreC.getText().equals("") || jTextFieldApellidoPC.getText().equals("") || jTextFieldApellidoMC.getText().equals("") || jTextFieldTelefonoC.getText().equals("") || jTextFieldMunicipioC.getText().equals("")) {
+                if (jTextFieldUsernameClien.getText().equals("") || jTextFieldEmailC.getText().equals("") || jPasswordFieldPasswdC.getText().equals("") || jTextFieldNombreC.getText().equals("") || jTextFieldApellidoPC.getText().equals("") || jTextFieldApellidoMC.getText().equals("") || jTextFieldTelefonoC.getText().equals("") || jTextFieldMunicipioC.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Debe llenar todos los campos\n¡No se permiten campos vacios!");
                 } else {
-                    if (pass.equals(passcon)) {
+                    
                         if (modSql.existeCliente(jTextFieldUsernameClien.getText()) == 0) {
                             if (modSql.esEmail(jTextFieldEmailC.getText())) {
-                                String nuevoPass = hash.sha1(pass);
+                                
 
                                 mod.setUsername_Clien(jTextFieldUsernameClien.getText());
                                 mod.setEmail_Clien(jTextFieldEmailC.getText());
-                                mod.setContrasena_Clien(nuevoPass);
+                                mod.setContrasena_Clien(jTextFieldUsernameClien.getText());
                                 mod.setNombre_Clien(jTextFieldNombreC.getText());
                                 mod.setAp_Clien(jTextFieldApellidoPC.getText());
                                 mod.setAm_Clien(jTextFieldApellidoMC.getText());
@@ -809,9 +836,7 @@ public class JFClientes extends javax.swing.JFrame {
                         } else {
                             JOptionPane.showMessageDialog(null, "El usuario ya existe");
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
-                    }
+                    
                 }
             } catch (HeadlessException ex) {
                 JOptionPane.showMessageDialog(null, "Error al guardar\n" + ex);
@@ -895,10 +920,18 @@ public class JFClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBuscarClientesActionPerformed
 
     private void jButtonNuevoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoCActionPerformed
-        jButtonGuardarC.setEnabled(true);
-        jButtonCancelarC.setEnabled(true);
-        jButtonActualizarC.setEnabled(false);
-        jButtonBorrarC.setEnabled(false);
+        int cancelar = JOptionPane.showConfirmDialog(null, "¿Quiere agregar un nuevo cliente frecuente'", "Cancelar registro", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (cancelar == 0) {
+            jButtonBuscarClientes.setEnabled(false);
+            jTextFieldBuscarCliente.setEnabled(false);
+            jComboBoxBuscarCliente.setEnabled(false);
+            jButtonGuardarC.setEnabled(true);
+            jButtonCancelarC.setEnabled(true);
+            jButtonActualizarC.setEnabled(false);
+            jButtonBorrarC.setEnabled(false);
+            limpiar();
+        } else {
+        }
     }//GEN-LAST:event_jButtonNuevoCActionPerformed
 
     private void jButtonCancelarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarCActionPerformed
@@ -908,6 +941,9 @@ public class JFClientes extends javax.swing.JFrame {
             jButtonBorrarC.setEnabled(true);
             jButtonCancelarC.setEnabled(false);
             jButtonGuardarC.setEnabled(false);
+            jButtonBuscarClientes.setEnabled(true);
+            jTextFieldBuscarCliente.setEnabled(true);
+            jComboBoxBuscarCliente.setEnabled(true);
 
         } else {
             JOptionPane.showMessageDialog(null, "");
@@ -962,11 +998,69 @@ public class JFClientes extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuInicioMouseClicked
 
+    private void jTextFieldUsernameClienKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldUsernameClienKeyTyped
+        String Caracteres = jTextFieldUsernameClien.getText();
+        jPasswordFieldPasswdC.setText(jTextFieldUsernameClien.getText());
+        if (Caracteres.length() > 19) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldUsernameClienKeyTyped
+
+    private void jTextFieldEmailCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldEmailCKeyTyped
+        String Caracteres = jTextFieldEmailC.getText();
+        if (Caracteres.length() > 49) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldEmailCKeyTyped
+
+    private void jPasswordFieldPasswdCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswdCKeyTyped
+        String Caracteres = jPasswordFieldPasswdC.getText();
+        if (Caracteres.length() > 30) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jPasswordFieldPasswdCKeyTyped
+
+    private void jTextFieldNombreCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreCKeyTyped
+        String Caracteres = jTextFieldNombreC.getText();
+        if (Caracteres.length() > 29) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldNombreCKeyTyped
+
+    private void jTextFieldApellidoPCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldApellidoPCKeyTyped
+        String Caracteres = jTextFieldApellidoPC.getText();
+        if (Caracteres.length() > 29) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldApellidoPCKeyTyped
+
+    private void jTextFieldApellidoMCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldApellidoMCKeyTyped
+        String Caracteres = jTextFieldNombreC.getText();
+        if (Caracteres.length() > 29) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldApellidoMCKeyTyped
+
+    private void jTextFieldTelefonoCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTelefonoCKeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+        String Caracteres = jTextFieldTelefonoC.getText();
+        if (Caracteres.length() > 19) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldTelefonoCKeyTyped
+
+    private void jTextFieldMunicipioCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldMunicipioCKeyTyped
+        String Caracteres = jTextFieldMunicipioC.getText();
+        if (Caracteres.length() > 19) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldMunicipioCKeyTyped
+
     private void limpiar() {
         jTextFieldUsernameClien.setText("");
         jTextFieldEmailC.setText("");
-        jTextFieldNombreC.setText("");
-        jPasswordFieldConfPasswdC.setText("");
         jPasswordFieldPasswdC.setText("");
         jTextFieldNombreC.setText("");
         jTextFieldApellidoMC.setText("");
@@ -1035,7 +1129,6 @@ public class JFClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelEmailCliente;
     private javax.swing.JLabel jLabelEmailCliente1;
     private javax.swing.JLabel jLabelEmailCliente2;
-    private javax.swing.JLabel jLabelEmailCliente3;
     private javax.swing.JLabel jLabelLogoMenu;
     private javax.swing.JLabel jLabelNombreCliente;
     private javax.swing.JLabel jLabelTelefonoCliente;
@@ -1050,7 +1143,6 @@ public class JFClientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelClientes;
     private javax.swing.JPanel jPanelMenuSecundario;
     private javax.swing.JPanel jPanelTablaClientes;
-    private javax.swing.JPasswordField jPasswordFieldConfPasswdC;
     private javax.swing.JPasswordField jPasswordFieldPasswdC;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

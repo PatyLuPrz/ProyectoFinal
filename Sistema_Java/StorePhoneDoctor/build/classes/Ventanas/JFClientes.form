@@ -467,14 +467,12 @@
                                   <Component id="jLabelEmailCliente" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabelEmailCliente1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabelEmailCliente2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelEmailCliente3" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextFieldEmailC" max="32767" attributes="0"/>
                                   <Component id="jTextFieldUsernameClien" max="32767" attributes="0"/>
-                                  <Component id="jPasswordFieldConfPasswdC" alignment="0" pref="335" max="32767" attributes="0"/>
-                                  <Component id="jPasswordFieldPasswdC" max="32767" attributes="0"/>
+                                  <Component id="jPasswordFieldPasswdC" pref="335" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -520,12 +518,7 @@
                           <Component id="jLabelEmailCliente2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="jPasswordFieldPasswdC" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="9" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelEmailCliente3" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="jPasswordFieldConfPasswdC" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelNombreCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldNombreC" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -543,14 +536,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jTextFieldTelefonoC" max="32767" attributes="0"/>
-                          <Component id="jLabelTelefonoCliente" max="32767" attributes="0"/>
+                          <Component id="jLabelTelefonoCliente" min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jTextFieldMunicipioC" max="32767" attributes="0"/>
-                          <Component id="jLabelDireccionCliente" max="32767" attributes="0"/>
+                          <Component id="jLabelDireccionCliente" min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -573,6 +566,9 @@
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldEmailCKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldNombreC">
               <Properties>
@@ -580,6 +576,9 @@
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldNombreCKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelNombreCliente">
               <Properties>
@@ -598,6 +597,9 @@
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldApellidoPCKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelApellidoPaCliente">
               <Properties>
@@ -616,6 +618,9 @@
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldApellidoMCKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelApellidoMatCliente">
               <Properties>
@@ -634,6 +639,9 @@
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldMunicipioCKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelDireccionCliente">
               <Properties>
@@ -663,6 +671,9 @@
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldTelefonoCKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelEmailCliente1">
               <Properties>
@@ -681,6 +692,9 @@
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldUsernameClienKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelEmailCliente2">
               <Properties>
@@ -693,20 +707,13 @@
                 <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelEmailCliente3">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Confirmar Contrase&#xf1;a:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordFieldConfPasswdC">
-            </Component>
             <Component class="javax.swing.JPasswordField" name="jPasswordFieldPasswdC">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jPasswordFieldPasswdCKeyTyped"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -857,7 +864,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="15" max="32767" attributes="0"/>
                       <Component id="jButtonNuevoC" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonGuardarC" min="-2" pref="40" max="-2" attributes="0"/>
@@ -867,7 +874,7 @@
                       <Component id="jButtonActualizarC" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonBorrarC" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
