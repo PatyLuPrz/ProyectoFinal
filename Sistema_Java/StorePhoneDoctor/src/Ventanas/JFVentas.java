@@ -24,6 +24,8 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Conexion;
 import modelo.SqlAgregarVenta;
 import modelo.agregarVenta;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -62,6 +64,17 @@ public class JFVentas extends javax.swing.JFrame {
     }}
     
      */
+    public void limpiarCampos() {
+        try {
+            for (int i = 0; i < model.getRowCount(); i++) {
+                model.removeRow(i);
+                i -= 1;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+        }
+    }
+
     public void tablaConsultaClientes() {
         try {//Tabla que se encargara de buscar los clientes
             DefaultTableModel modelo = new DefaultTableModel();
@@ -139,10 +152,19 @@ public class JFVentas extends javax.swing.JFrame {
         }
     }
 
+    public String fecha() {
+        Date fecha = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(fecha);
+    }
+
     public JFVentas() {
         initComponents();
         tablaConsultaClientes();
         tablaConsultaProductos();
+
+        String x = jDateChooser1.getDateFormatString();
+        System.out.println(x);
 
         setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
 
@@ -235,7 +257,7 @@ public class JFVentas extends javax.swing.JFrame {
         jComboBoxDescuento = new javax.swing.JComboBox<>();
         jLabelDescuentoPCantidad = new javax.swing.JLabel();
         jTextFieldDescuentoPCantidad = new javax.swing.JTextField();
-        jLabelProductoPrecioLabel = new javax.swing.JLabel();
+        jLabelProductoV2 = new javax.swing.JLabel();
         jLabelProductoPrecio = new javax.swing.JLabel();
         jPanelTablaVenta2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -286,6 +308,8 @@ public class JFVentas extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jToggleButton3 = new javax.swing.JToggleButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jTextFieldFechaReporte = new javax.swing.JTextField();
         jLayeredPaneDevoluciones = new javax.swing.JLayeredPane();
         jPanelDevoluciones = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -601,9 +625,9 @@ public class JFVentas extends javax.swing.JFrame {
         jLabelDescuentoPCantidad.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDescuentoPCantidad.setText("D.p. cantidad:");
 
-        jLabelProductoPrecioLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabelProductoPrecioLabel.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelProductoPrecioLabel.setText("Precio:");
+        jLabelProductoV2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabelProductoV2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelProductoV2.setText("Precio:");
 
         jLabelProductoPrecio.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelProductoPrecio.setForeground(new java.awt.Color(255, 255, 255));
@@ -644,7 +668,7 @@ public class JFVentas extends javax.swing.JFrame {
                             .addComponent(jTextFieldDescuentoPCantidad)
                             .addComponent(jComboBoxDescuento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTablaVentaLayout.createSequentialGroup()
-                        .addComponent(jLabelProductoPrecioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelProductoV2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelProductoPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -674,7 +698,7 @@ public class JFVentas extends javax.swing.JFrame {
                     .addComponent(jLabelProductoV1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelProductoPrecioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelProductoV2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelProductoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1313,32 +1337,45 @@ public class JFVentas extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDateChooser1.setDateFormatString("yyyy-MM-dd");
+
+        jTextFieldFechaReporte.setText("jTextField7");
+
         jLayeredPaneCajas.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPaneCajas.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPaneCajas.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPaneCajas.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPaneCajas.setLayer(jPanel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPaneCajas.setLayer(jPanel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPaneCajas.setLayer(jDateChooser1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPaneCajas.setLayer(jTextFieldFechaReporte, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPaneCajasLayout = new javax.swing.GroupLayout(jLayeredPaneCajas);
         jLayeredPaneCajas.setLayout(jLayeredPaneCajasLayout);
         jLayeredPaneCajasLayout.setHorizontalGroup(
             jLayeredPaneCajasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPaneCajasLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jLayeredPaneCajasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPaneCajasLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(jLayeredPaneCajasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jLayeredPaneCajasLayout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jLayeredPaneCajasLayout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jLayeredPaneCajasLayout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(312, 312, 312)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldFechaReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(221, Short.MAX_VALUE))
         );
         jLayeredPaneCajasLayout.setVerticalGroup(
@@ -1354,7 +1391,11 @@ public class JFVentas extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addGroup(jLayeredPaneCajasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldFechaReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cajas", jLayeredPaneCajas);
@@ -1364,79 +1405,79 @@ public class JFVentas extends javax.swing.JFrame {
 
         jTableHistorialDevolucion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Folio", "Producto Vendido", "Cantidad", "Precio Venta", "Usuario", "Cliente", "Fecha"
+                "Folio", "Codigo", "Fecha de Garantia", "Cantidad", "Usuario"
             }
         ));
         jScrollPane4.setViewportView(jTableHistorialDevolucion);
@@ -1802,7 +1843,7 @@ public class JFVentas extends javax.swing.JFrame {
                     Integer can = (Integer) (jSpinner1.getValue());
                     String usu = USUARIOPRODUCTOS.getText();
                     String cli = jLabelClienteVenta.getText();
-                    Double pre = agreV.getPrecio();
+                    Double pre = Double.parseDouble(jLabelProductoPrecio.getText());
 
                     Double imp = 0.0;
                     String s = null;
@@ -1939,6 +1980,7 @@ public class JFVentas extends javax.swing.JFrame {
     private void jButtonCancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarVentaActionPerformed
         int cancelar = JOptionPane.showConfirmDialog(null, "¿Quieres cancelar la venta?", "Cancelar Venta", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (cancelar == 0) {
+            limpiarCampos();
             for (Component component : jPanelTablaClientes.getComponents()) {
                 jTableClientes.setEnabled(false);
                 component.setEnabled(false);
@@ -2143,50 +2185,61 @@ public class JFVentas extends javax.swing.JFrame {
                 jTextFieldDescuentoPCantidad.setEnabled(true);
                 descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
                 precioFinal = Double.toString(descuento);
+                jLabelProductoPrecio.setText(precioFinal);
+
                 break;
             case 2:
+                jTextFieldDescuentoPCantidad.setEnabled(false);
                 descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
                 precioFinal = Double.toString(descuento);
+                jLabelProductoPrecio.setText(precioFinal);
                 break;
             case 3:
-                jTextFieldDescuentoPCantidad.setEnabled(true);
-                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                jTextFieldDescuentoPCantidad.setEnabled(false);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .10));
                 precioFinal = Double.toString(descuento);
+                jLabelProductoPrecio.setText(precioFinal);
                 break;
             case 4:
-                jTextFieldDescuentoPCantidad.setEnabled(true);
-                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                jTextFieldDescuentoPCantidad.setEnabled(false);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .15));
                 precioFinal = Double.toString(descuento);
+                jLabelProductoPrecio.setText(precioFinal);
                 break;
             case 5:
-                jTextFieldDescuentoPCantidad.setEnabled(true);
-                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                jTextFieldDescuentoPCantidad.setEnabled(false);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .20));
                 precioFinal = Double.toString(descuento);
+                jLabelProductoPrecio.setText(precioFinal);
                 break;
             case 6:
-                jTextFieldDescuentoPCantidad.setEnabled(true);
-                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                jTextFieldDescuentoPCantidad.setEnabled(false);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .30));
                 precioFinal = Double.toString(descuento);
+                jLabelProductoPrecio.setText(precioFinal);
                 break;
             case 7:
-                jTextFieldDescuentoPCantidad.setEnabled(true);
-                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                jTextFieldDescuentoPCantidad.setEnabled(false);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .40));
                 precioFinal = Double.toString(descuento);
                 break;
             case 8:
-                jTextFieldDescuentoPCantidad.setEnabled(true);
-                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                jTextFieldDescuentoPCantidad.setEnabled(false);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .50));
                 precioFinal = Double.toString(descuento);
+                jLabelProductoPrecio.setText(precioFinal);
                 break;
             case 9:
-                jTextFieldDescuentoPCantidad.setEnabled(true);
-                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                jTextFieldDescuentoPCantidad.setEnabled(false);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .60));
                 precioFinal = Double.toString(descuento);
+                jLabelProductoPrecio.setText(precioFinal);
                 break;
             case 10:
-                jTextFieldDescuentoPCantidad.setEnabled(true);
-                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
+                jTextFieldDescuentoPCantidad.setEnabled(false);
+                descuento = (descuentoPCantidad - (descuentoPCantidad * .70));
                 precioFinal = Double.toString(descuento);
+                jLabelProductoPrecio.setText(precioFinal);
                 break;
         }
     }//GEN-LAST:event_jComboBoxDescuentoActionPerformed
@@ -2260,6 +2313,7 @@ public class JFVentas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxSeleccionaHistorial;
     private javax.swing.JComboBox<String> jComboBoxTipoBusqProd;
     private javax.swing.JComboBox<String> jComboBoxTipoClienteV;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -2282,9 +2336,9 @@ public class JFVentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLogoMenu;
     public javax.swing.JLabel jLabelProductoAVender;
     public javax.swing.JLabel jLabelProductoPrecio;
-    private javax.swing.JLabel jLabelProductoPrecioLabel;
     private javax.swing.JLabel jLabelProductoV;
     private javax.swing.JLabel jLabelProductoV1;
+    private javax.swing.JLabel jLabelProductoV2;
     private javax.swing.JLabel jLabelTotalImport;
     private javax.swing.JLayeredPane jLayeredPaneCajas;
     private javax.swing.JLayeredPane jLayeredPaneDevoluciones;
@@ -2334,6 +2388,7 @@ public class JFVentas extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldBuscarHistorialDevolucion;
     private javax.swing.JTextField jTextFieldBuscarProd;
     private javax.swing.JTextField jTextFieldDescuentoPCantidad;
+    private javax.swing.JTextField jTextFieldFechaReporte;
     private javax.swing.JTextField jTextFieldFolioVenta;
     private javax.swing.JTextField jTextFieldPagado;
     private javax.swing.JToggleButton jToggleButton1;
