@@ -69,8 +69,6 @@ public class JFServicios extends javax.swing.JFrame {
                 }
 
                 modelo.addRow(filas);
-                System.out.println(filas);
-
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error" + ex);
