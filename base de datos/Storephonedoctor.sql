@@ -1,9 +1,12 @@
+CREATE DATABASE storephonedoctor;
+USE storephonedoctor;
+
 -- phpMyAdmin SQL Dump
 -- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-08-2018 a las 00:38:29
+-- Tiempo de generación: 17-08-2018 a las 06:32:10
 -- Versión del servidor: 10.1.33-MariaDB
 -- Versión de PHP: 7.2.6
 
@@ -39,6 +42,13 @@ CREATE TABLE `clientes` (
   `MUN_CL` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='REGISTRO DE CLIENTES FRECUENTES';
 
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`USERNAME_CL`, `EMAIL_CL`, `CONTRASENA_CL`, `NOMBRE_CL`, `AP_CL`, `AM_CL`, `TEL_CL`, `MUN_CL`) VALUES
+('Publico General', 'storephonedoctor@gmail.com', 'Publico General', 'Store', 'Phone', 'Doctor', '00000000', 'StorePhone Doctor');
+
 -- --------------------------------------------------------
 
 --
@@ -69,6 +79,16 @@ CREATE TABLE `productos` (
   `DESCRIPCION_P` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='REGISTRO DEL INVENTARIO';
 
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`CODIGO_P`, `NOMBRE_P`, `CATEGORIA_P`, `MARCA_P`, `CANTIDAD_P`, `PRECIO_VENTA_P`, `PRECIO_COMPRA_P`, `IMG_P`, `DESCRIPCION_P`) VALUES
+('SPD0000000001', 'Mica Iphone 5/5s/5c', 'Mica de Vidrio ', 'Apple', 13, 50, 30, NULL, NULL),
+('SPD0000000002', 'Mica Iphone 6/6s', 'Mica de Vidrio ', 'Apple', 18, 50, 30, NULL, NULL),
+('SPD0000000003', 'Mica Iphone 7/8', 'Mica de Vidrio ', 'Apple', 18, 50, 30, NULL, NULL),
+('SPD0000000004', 'Micro SD 8GB Clase 10', 'Memoria', 'Kingston', 8, 120, 80, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -76,9 +96,9 @@ CREATE TABLE `productos` (
 --
 
 CREATE TABLE `servicios` (
-  `FOLIO_S` varchar(10) NOT NULL,
+  `FOLIO_S` varchar(13) NOT NULL,
   `USERNAME_US` varchar(20) NOT NULL,
-  `USERNAME_CL` varchar(20) NOT NULL,
+  `USERNAME_CL` varchar(20) NOT NULL DEFAULT '',
   `FECHALLEGADA_S` varchar(15) NOT NULL,
   `FECHASALIDA_S` varchar(15) DEFAULT NULL,
   `NOMBRECLIENTE_S` varchar(60) NOT NULL,
@@ -87,6 +107,14 @@ CREATE TABLE `servicios` (
   `PRECIO_S` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='BITACORA DE SERVICIOS';
 
+--
+-- Volcado de datos para la tabla `servicios`
+--
+
+INSERT INTO `servicios` (`FOLIO_S`, `USERNAME_US`, `USERNAME_CL`, `FECHALLEGADA_S`, `FECHASALIDA_S`, `NOMBRECLIENTE_S`, `TELEFONOCLIENTE_S`, `DESCRIPCION_S`, `PRECIO_S`) VALUES
+('SSP0000000001', 'NorbertoPaloma1998', 'Publico General', '2018-08-16', 'En proceso', 'Macario Sicario', '7751234567', 'Display iphone 7 negro', 2500),
+('SSP0000000002', 'NorbertoPaloma1998', 'MayraPatric', '2018-08-16', 'En proceso', 'Mayra', '7759876543', 'Cambio de Touch Verykool ', 100);
+
 -- --------------------------------------------------------
 
 --
@@ -94,7 +122,7 @@ CREATE TABLE `servicios` (
 -- (Véase abajo para la vista actual)
 --
 CREATE TABLE `servicios_no_adm` (
-`FOLIO_S` varchar(10)
+`FOLIO_S` varchar(13)
 ,`FECHALLEGADA_S` varchar(15)
 ,`NOMBRECLIENTE_S` varchar(60)
 ,`TELEFONOCLIENTE_S` varchar(20)
@@ -108,7 +136,7 @@ CREATE TABLE `servicios_no_adm` (
 -- (Véase abajo para la vista actual)
 --
 CREATE TABLE `servicios_no_adm_dos` (
-`FOLIO_S` varchar(10)
+`FOLIO_S` varchar(13)
 ,`FECHALLEGADA_S` varchar(15)
 ,`NOMBRE_CL` varchar(30)
 );
@@ -129,6 +157,13 @@ CREATE TABLE `usuarios` (
   `TIPO_US` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='REGISTRO DE USUARIOS DEL SISTEMA';
 
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`USERNAME_US`, `EMAIL_US`, `CONTRASENA_US`, `NOMBRE_US`, `AP_US`, `AM_US`, `TIPO_US`) VALUES
+('NorbertoPaloma1998', 'luis_norberto1998@hotmail.com', '66f4501149cbc7d3a40f3be7dce4b4b970666649', 'Luis Norberto', 'Paloma', 'Rodriguez', 'Administrador');
+
 -- --------------------------------------------------------
 
 --
@@ -136,7 +171,7 @@ CREATE TABLE `usuarios` (
 --
 
 CREATE TABLE `ventas` (
-  `FOLIO_V` varchar(10) NOT NULL,
+  `FOLIO_V` varchar(13) NOT NULL,
   `USERNAME_US` varchar(20) NOT NULL,
   `USERNAME_CL` varchar(50) NOT NULL,
   `FECHA_V` varchar(15) NOT NULL,
@@ -151,9 +186,9 @@ CREATE TABLE `ventas` (
 
 CREATE TABLE `ventas_producto` (
   `ID_VP` int(11) NOT NULL,
-  `FOLIO_V` varchar(10) NOT NULL,
+  `FOLIO_V` varchar(13) NOT NULL,
   `CODIGO_P` varchar(13) NOT NULL,
-  `PRECIO_P` double NOT NULL,
+  `PRECIO_VP` double NOT NULL,
   `SUBTOTAL_VP` double NOT NULL,
   `CANTIDAD_VP` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='PRODUCTOS VENDIDOS';
@@ -240,7 +275,7 @@ ALTER TABLE `ventas_producto`
 -- AUTO_INCREMENT de la tabla `ventas_producto`
 --
 ALTER TABLE `ventas_producto`
-  MODIFY `ID_VP` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_VP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas

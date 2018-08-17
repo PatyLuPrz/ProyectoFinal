@@ -132,14 +132,14 @@ public class SqlClientes extends Conexion {
         }
     }
 
-    public boolean borrarClien(productos produ) {
+    public boolean borrarClien(clientes clients) {
         PreparedStatement ps = null; //variable de Statement
         Connection con = (Connection) getConexion(); //Se obtiene la conexion para la clase
         String sql = "DELETE FROM productos WHERE CODIGO_P = ?";
         try {
 
             ps = (PreparedStatement) con.prepareStatement(sql);
-            ps.setString(1, produ.getCodigo_prod());
+            ps.setString(1, clients.getUsername_Clien());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

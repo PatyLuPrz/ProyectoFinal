@@ -22,8 +22,10 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import modelo.Conexion;
 import modelo.SqlClientes;
+import modelo.SqlProductos;
 import modelo.clientes;
 import modelo.hash;
+import modelo.productos;
 
 /**
  *
@@ -808,35 +810,34 @@ public class JFClientes extends javax.swing.JFrame {
                 if (jTextFieldUsernameClien.getText().equals("") || jTextFieldEmailC.getText().equals("") || jPasswordFieldPasswdC.getText().equals("") || jTextFieldNombreC.getText().equals("") || jTextFieldApellidoPC.getText().equals("") || jTextFieldApellidoMC.getText().equals("") || jTextFieldTelefonoC.getText().equals("") || jTextFieldMunicipioC.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Debe llenar todos los campos\n¡No se permiten campos vacios!");
                 } else {
-                    
-                        if (modSql.existeCliente(jTextFieldUsernameClien.getText()) == 0) {
-                            if (modSql.esEmail(jTextFieldEmailC.getText())) {
-                                
 
-                                mod.setUsername_Clien(jTextFieldUsernameClien.getText());
-                                mod.setEmail_Clien(jTextFieldEmailC.getText());
-                                mod.setContrasena_Clien(jTextFieldUsernameClien.getText());
-                                mod.setNombre_Clien(jTextFieldNombreC.getText());
-                                mod.setAp_Clien(jTextFieldApellidoPC.getText());
-                                mod.setAm_Clien(jTextFieldApellidoMC.getText());
-                                mod.setTel_Clien(jTextFieldTelefonoC.getText());
-                                mod.setMun_Clien(jTextFieldMunicipioC.getText());
+                    if (modSql.existeCliente(jTextFieldUsernameClien.getText()) == 0) {
+                        if (modSql.esEmail(jTextFieldEmailC.getText())) {
 
-                                limpiar();
+                            mod.setUsername_Clien(jTextFieldUsernameClien.getText());
+                            mod.setEmail_Clien(jTextFieldEmailC.getText());
+                            mod.setContrasena_Clien(jTextFieldUsernameClien.getText());
+                            mod.setNombre_Clien(jTextFieldNombreC.getText());
+                            mod.setAp_Clien(jTextFieldApellidoPC.getText());
+                            mod.setAm_Clien(jTextFieldApellidoMC.getText());
+                            mod.setTel_Clien(jTextFieldTelefonoC.getText());
+                            mod.setMun_Clien(jTextFieldMunicipioC.getText());
 
-                                if (modSql.registrarClientes(mod)) {
-                                    JOptionPane.showMessageDialog(null, "El registro fue guardado");
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Error al guardar");
-                                }
+                            limpiar();
 
+                            if (modSql.registrarClientes(mod)) {
+                                JOptionPane.showMessageDialog(null, "El registro fue guardado");
                             } else {
-                                JOptionPane.showMessageDialog(null, "El correo no es valido");
+                                JOptionPane.showMessageDialog(null, "Error al guardar");
                             }
+
                         } else {
-                            JOptionPane.showMessageDialog(null, "El usuario ya existe");
+                            JOptionPane.showMessageDialog(null, "El correo no es valido");
                         }
-                    
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El usuario ya existe");
+                    }
+
                 }
             } catch (HeadlessException ex) {
                 JOptionPane.showMessageDialog(null, "Error al guardar\n" + ex);
@@ -981,11 +982,24 @@ public class JFClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonActualizarCActionPerformed
 
     private void jButtonBorrarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarCActionPerformed
-        int cancelar = JOptionPane.showConfirmDialog(null, "¿Desea borrar este producto?", "Confirmar salida", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int cancelar = JOptionPane.showConfirmDialog(null, "¿Borrar Cliente?", "Eliminar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (cancelar == 0) {
+            SqlClientes sqlClien = new SqlClientes();
+            clientes clien = new clientes();
+            try {
 
-        } else {
-            JOptionPane.showMessageDialog(null, "");
+                clien.setUsername_Clien(jTextFieldUsernameClien.getText());
+
+                if (sqlClien.borrarClien(clien)) {
+                    tablaConsulta();
+                    JOptionPane.showMessageDialog(null, "El cliente fue borrado");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al borrar");
+                }
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "No puedes borrar este cliente");
+            }
         }
     }//GEN-LAST:event_jButtonBorrarCActionPerformed
 
