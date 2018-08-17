@@ -24,7 +24,7 @@ import javax.swing.ImageIcon;
 public class ImagenMenuSecundario extends javax.swing.JPanel {
 
     public ImagenMenuSecundario() {
-        this.setSize(200, 900); //se selecciona el tamaño del panel
+        this.setSize(250, 900); //se selecciona el tamaño del panel
     }
 
 //Se crea un método cuyo parámetro debe ser un objeto Graphics

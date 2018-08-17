@@ -6,9 +6,6 @@
 package Ventanas;
 
 import java.awt.Image;
-/*Se importo la libreria Image*/
-import java.awt.Toolkit;
-/*Se importo la libreria Toolkit*/
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;

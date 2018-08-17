@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import modelo.Conexion;
 import modelo.FechaConsulta;
+import modelo.GenerarCodigos;
 import modelo.servicios;
 import modelo.sqlServicios;
 
@@ -155,6 +157,52 @@ public class JFServicios extends javax.swing.JFrame {
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Images/IconoPrograma.png"));
         return retValue;/*Se genero una clase donde se manda llamar un icono para JFrame*/
+    }
+
+    void codigosServicios() {
+
+        int j;
+        int cont = 1;
+        String num = "";
+        String c = "";
+
+        // String SQL="select count(*) from factura";
+        //String SQL="SELECT MAX(cod_emp) AS cod_emp FROM empleado";
+        //String SQL="SELECT @@identity AS ID"; 
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        String SQL = "SELECT MAX(FOLIO_V) FROM ventas";
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+            if (rs.next()) {
+                c = rs.getString(1);
+            }
+
+            if (c == null) {
+                jTextFieldFolioS.setText("SSP0000000001");
+            } else {
+                char r1 = c.charAt(3);
+                char r2 = c.charAt(4);
+                char r3 = c.charAt(5);
+                char r4 = c.charAt(6);
+                char r5 = c.charAt(7);
+                char r6 = c.charAt(8);
+                char r7 = c.charAt(9);
+                char r8 = c.charAt(10);
+                char r9 = c.charAt(11);
+                char r10 = c.charAt(12);
+                String r = "";
+                r = "" + r1 + r2 + r3 + r4 + r5 + r6 + r7 + r8 + r9 + r10;
+                j = Integer.parseInt(r);
+                GenerarCodigos gen = new GenerarCodigos();
+                gen.generar(j);
+                jTextFieldFolioS.setText("SSP" + gen.serie());
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error" + ex);
+        }
     }
 
     /**
@@ -351,12 +399,12 @@ public class JFServicios extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonVentas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonServicios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                    .addComponent(jButtonProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelMenuSecundarioLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(jLabelLogoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(29, Short.MAX_VALUE))))
         );
         jPanelMenuSecundarioLayout.setVerticalGroup(
             jPanelMenuSecundarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,7 +419,7 @@ public class JFServicios extends javax.swing.JFrame {
                 .addComponent(jButtonClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jLabelLogoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -533,7 +581,7 @@ public class JFServicios extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldFechaEntradaS)
-                            .addComponent(jTextFieldFechaSalidaS, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)))
+                            .addComponent(jTextFieldFechaSalidaS)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelNombreUsuarioS)
@@ -547,7 +595,7 @@ public class JFServicios extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabelTelefonoCliente1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -724,7 +772,9 @@ public class JFServicios extends javax.swing.JFrame {
             .addGroup(jPanelTablaClientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTablaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+                    .addGroup(jPanelTablaClientesLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
                     .addGroup(jPanelTablaClientesLayout.createSequentialGroup()
                         .addComponent(jButtonBuscarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -732,14 +782,13 @@ public class JFServicios extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldBuscarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(jButtonFinalizarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jButtonFinalizarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))))
         );
         jPanelTablaClientesLayout.setVerticalGroup(
             jPanelTablaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTablaClientesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelTablaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFinalizarServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -877,8 +926,7 @@ public class JFServicios extends javax.swing.JFrame {
                         .addGroup(jPanelServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanelEdicionServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanelTablaClientes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jMenuBarPrincipal.setBackground(new java.awt.Color(255, 0, 0));
@@ -1008,7 +1056,10 @@ public class JFServicios extends javax.swing.JFrame {
             jButtonBorrarS.setEnabled(false);
             jButtonActualizarS.setEnabled(false);
             jButtonBuscarServicio.setEnabled(false);
-            limpiarCampos();
+
+            jTextFieldFolioS.requestFocus();
+            codigosServicios();
+
         } else {
             JOptionPane.showMessageDialog(null, "Nuevo servicio cancelado");
         }

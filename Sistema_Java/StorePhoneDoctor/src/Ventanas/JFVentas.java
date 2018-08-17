@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -26,6 +27,7 @@ import modelo.SqlAgregarVenta;
 import modelo.agregarVenta;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import modelo.GenerarCodigos;
 
 /**
  *
@@ -69,6 +71,27 @@ public class JFVentas extends javax.swing.JFrame {
             for (int i = 0; i < model.getRowCount(); i++) {
                 model.removeRow(i);
                 i -= 1;
+            }
+            codigosVentas();
+            jButtonRealizarVenta.setEnabled(false);
+            jButtonRealizarCalculo.setEnabled(false);
+            jButtonCancelarVenta.setEnabled(false);
+            jButtonQuitarProd.setEnabled(false);
+            jButtonAgregarProd.setEnabled(false);
+            jSpinner1.setEnabled(false);
+            jTextFieldDescuentoPCantidad.setEnabled(false);
+            jComboBoxDescuento.setEnabled(false);
+            jTabbedPane1.setEnabled(true);
+            jButtonIniciarVenta.setEnabled(true);
+
+            for (Component component : jPanelTablaClientes.getComponents()) {
+                jTableClientes.setEnabled(false);
+                component.setEnabled(false);
+            }
+
+            for (Component component : jPanelTablaProductos.getComponents()) {
+                jTableInventarioVenta.setEnabled(false);
+                component.setEnabled(false);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
@@ -160,11 +183,11 @@ public class JFVentas extends javax.swing.JFrame {
 
     public JFVentas() {
         initComponents();
+
         tablaConsultaClientes();
         tablaConsultaProductos();
 
-        String x = jDateChooser1.getDateFormatString();
-        System.out.println(x);
+        jLabelFechaVenta.setText(fecha());
 
         setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
 
@@ -186,6 +209,7 @@ public class JFVentas extends javax.swing.JFrame {
         jButtonAgregarProd.setEnabled(false);
         jSpinner1.setEnabled(false);
         jTextFieldDescuentoPCantidad.setEnabled(false);
+        jComboBoxDescuento.setEnabled(false);
 
         for (Component component : jPanelTablaClientes.getComponents()) {
             jTableClientes.setEnabled(false);
@@ -208,11 +232,59 @@ public class JFVentas extends javax.swing.JFrame {
         this.model.addColumn("Precio");
         this.model.addColumn("Importe");
 
+        codigosVentas();
+
     }
 
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Images/IconoPrograma.png"));
         return retValue;/*Se genero una clase donde se manda llamar un icono para JFrame*/
+    }
+
+    void codigosVentas() {
+
+        int j;
+        int cont = 1;
+        String num = "";
+        String c = "";
+
+        // String SQL="select count(*) from factura";
+        //String SQL="SELECT MAX(cod_emp) AS cod_emp FROM empleado";
+        //String SQL="SELECT @@identity AS ID"; 
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        String SQL = "SELECT MAX(FOLIO_V) FROM ventas";
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+            if (rs.next()) {
+                c = rs.getString(1);
+            }
+
+            if (c == null) {
+                jTextFieldFolioVenta.setText("VSP0000000001");
+            } else {
+                char r1 = c.charAt(3);
+                char r2 = c.charAt(4);
+                char r3 = c.charAt(5);
+                char r4 = c.charAt(6);
+                char r5 = c.charAt(7);
+                char r6 = c.charAt(8);
+                char r7 = c.charAt(9);
+                char r8 = c.charAt(10);
+                char r9 = c.charAt(11);
+                char r10 = c.charAt(12);
+                String r = "";
+                r = "" + r1 + r2 + r3 + r4 + r5 + r6 + r7 + r8 + r9 + r10;
+                j = Integer.parseInt(r);
+                GenerarCodigos gen = new GenerarCodigos();
+                gen.generar(j);
+                jTextFieldFolioVenta.setText("VSP" + gen.serie());
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error" + ex);
+        }
     }
 
     /**
@@ -412,6 +484,7 @@ public class JFVentas extends javax.swing.JFrame {
 
         USUARIOPRODUCTOS.setFont(new java.awt.Font("Dialog", 3, 10)); // NOI18N
         USUARIOPRODUCTOS.setForeground(new java.awt.Color(255, 255, 255));
+        USUARIOPRODUCTOS.setText("NorbertoPaloma1998");
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Username:");
@@ -456,7 +529,7 @@ public class JFVentas extends javax.swing.JFrame {
                 .addGroup(jPanelMenuSecundarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonServicios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(jButtonProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(jPanelMenuSecundarioLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -545,14 +618,12 @@ public class JFVentas extends javax.swing.JFrame {
             jPanelTablaVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTablaVentasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelTablaVentasLayout.setVerticalGroup(
             jPanelTablaVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTablaVentasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         jPanelTablaVenta.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Venta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 14), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -571,6 +642,12 @@ public class JFVentas extends javax.swing.JFrame {
         jLabelFechaVenta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabelFechaVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabelFechaVenta.setPreferredSize(new java.awt.Dimension(14, 24));
+
+        jTextFieldFolioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldFolioVentaKeyTyped(evt);
+            }
+        });
 
         jLabelProductoV.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabelProductoV.setForeground(new java.awt.Color(255, 255, 255));
@@ -692,7 +769,7 @@ public class JFVentas extends javax.swing.JFrame {
                 .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelProductoV, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelProductoAVender, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelTablaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelProductoV1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -709,7 +786,7 @@ public class JFVentas extends javax.swing.JFrame {
                     .addComponent(jLabelDescuentoPCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldDescuentoPCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonIniciarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonIniciarVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -994,7 +1071,7 @@ public class JFVentas extends javax.swing.JFrame {
             .addGroup(jPanelTablaProductosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTablaProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
                     .addGroup(jPanelTablaProductosLayout.createSequentialGroup()
                         .addComponent(JButtonBuscarProd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1056,20 +1133,20 @@ public class JFVentas extends javax.swing.JFrame {
                         .addComponent(jPanelTablaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanelTablaProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPaneVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPaneVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jLayeredPaneVentasLayout.createSequentialGroup()
-                            .addComponent(jButtonQuitarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButtonAgregarProd))
-                        .addComponent(jButtonRealizarVenta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanelTablaVenta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanelTablaVenta2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jLayeredPaneVentasLayout.createSequentialGroup()
-                        .addComponent(jButtonRealizarCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonCancelarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jLayeredPaneVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanelTablaVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanelTablaVenta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPaneVentasLayout.createSequentialGroup()
+                            .addGroup(jLayeredPaneVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButtonQuitarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonRealizarCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jLayeredPaneVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButtonCancelarVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonAgregarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jButtonRealizarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jLayeredPaneVentasLayout.setVerticalGroup(
@@ -1077,8 +1154,8 @@ public class JFVentas extends javax.swing.JFrame {
             .addGroup(jLayeredPaneVentasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPaneVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelTablaVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelTablaVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelTablaVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelTablaVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jLayeredPaneVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPaneVentasLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1086,14 +1163,14 @@ public class JFVentas extends javax.swing.JFrame {
                             .addComponent(jPanelTablaProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanelTablaClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPaneVentasLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
+                        .addGap(12, 12, 12)
                         .addComponent(jPanelTablaVenta2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonRealizarVenta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jLayeredPaneVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonQuitarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonAgregarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jLayeredPaneVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonAgregarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonQuitarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jLayeredPaneVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonCancelarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1376,7 +1453,7 @@ public class JFVentas extends javax.swing.JFrame {
                         .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldFechaReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
         jLayeredPaneCajasLayout.setVerticalGroup(
             jLayeredPaneCajasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1395,7 +1472,7 @@ public class JFVentas extends javax.swing.JFrame {
                 .addGroup(jLayeredPaneCajasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldFechaReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cajas", jLayeredPaneCajas);
@@ -1507,7 +1584,7 @@ public class JFVentas extends javax.swing.JFrame {
             .addGroup(jPanelDevolucionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelDevolucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1069, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
                     .addGroup(jPanelDevolucionesLayout.createSequentialGroup()
                         .addComponent(jButtonBuscarHistorialDevoluciones, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1527,7 +1604,7 @@ public class JFVentas extends javax.swing.JFrame {
                     .addComponent(jTextFieldBuscarHistorialDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBuscarHistorialDevoluciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1658,7 +1735,7 @@ public class JFVentas extends javax.swing.JFrame {
                         .addComponent(jComboBoxSeleccionaHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldBuscarHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 315, Short.MAX_VALUE)))
+                        .addGap(0, 286, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelHisotiralVentasLayout.setVerticalGroup(
@@ -1669,7 +1746,7 @@ public class JFVentas extends javax.swing.JFrame {
                     .addComponent(jComboBoxSeleccionaHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldBuscarHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1833,6 +1910,7 @@ public class JFVentas extends javax.swing.JFrame {
             agregarVenta agreV = new agregarVenta();
 
             try {
+
                 agreV.setCodigo(jLabelProductoAVender.getText());
 
                 if (sqlVenA.agregarProductoTabla(agreV)) {
@@ -1841,34 +1919,43 @@ public class JFVentas extends javax.swing.JFrame {
                     String nom = agreV.getNombre();
                     String cat = agreV.getCategoria();
                     Integer can = (Integer) (jSpinner1.getValue());
+                    Integer canti = can;
                     String usu = USUARIOPRODUCTOS.getText();
                     String cli = jLabelClienteVenta.getText();
                     Double pre = Double.parseDouble(jLabelProductoPrecio.getText());
+                    Integer canDescontar = agreV.getCantidad();
 
                     Double imp = 0.0;
                     String s = null;
                     int s1 = 0;
                     int a = 0;
-                    for (int i = 0; i < model.getRowCount(); i++) {//ciclo que busca el codigo del producto y lo iguala para sumar solo la cantidad
-                        if (model.getValueAt(i, 0).toString().equals(cod)) {
-                            a += 1;
-                            s = model.getValueAt(i, 3).toString();
-                            int canP = Integer.parseInt(s);
-                            s1 = canP += can; //Variable de obtencion de cantidad de productos que se repiten
-                            imp = (pre * s1); //Variable de importe total
-                            model.setValueAt(s1, i, 3); //Modificacion de la celda de cantidad
-                            model.setValueAt(imp, i, 7);//Modificacion de la celda de importe
+                    int s2 = 0;
+                    int canP = 0;
+                    if (!(canti > canDescontar)) {
+                        for (int i = 0; i < model.getRowCount(); i++) {//ciclo que busca el codigo del producto y lo iguala para sumar solo la cantidad
+                            if (model.getValueAt(i, 0).toString().equals(cod)) {
+                                a += 1;
+                                s = model.getValueAt(i, 3).toString();
+                                canP = Integer.parseInt(s);
+                                s1 = canP += can; //Variable de obtencion de cantidad de productos que se repiten
+                                imp = (pre * s1); //Variable de importe total
+                                model.setValueAt(s1, i, 3); //Modificacion de la celda de cantidad
+                                model.setValueAt(imp, i, 7);//Modificacion de la celda de importe
+                            }
+                        }
+                        if (a > 0) {
+                            System.out.println("Se encontró el número " + a + " veces");
+                            System.out.println(canP);
+
+                        } else {
+                            System.out.println("No se encontró el número");
+                            DefaultTableModel model = (DefaultTableModel) jTableProductosVender.getModel();
+                            double impo1 = (pre * can); //Importe incial
+                            model.addRow(new Object[]{cod, nom, cat, can, usu, cli, pre, impo1});
 
                         }
-                    }
-                    if (a > 0) {
-                        System.out.println("Se encontró el número " + a + " veces");
-
                     } else {
-                        System.out.println("No se encontró el número");
-                        DefaultTableModel model = (DefaultTableModel) jTableProductosVender.getModel();
-                        double impo1 = (pre * can); //Importe incial
-                        model.addRow(new Object[]{cod, nom, cat, can, usu, cli, pre, impo1});
+                        JOptionPane.showMessageDialog(null, "No tienes tantos productos para esta venta");
                     }
 
                     /*
@@ -1888,22 +1975,59 @@ public class JFVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAgregarProdActionPerformed
 
     private void jButtonRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRealizarVentaActionPerformed
+
         try {
-            double importeACobrar = Double.parseDouble(jLabelTotalImport.getText());
-            double cantidadPagada = Double.parseDouble(jTextFieldPagado.getText());
+            double importeACobrar = 0.0;
+            double cantidadPagada = 0.0;
+            double cambioCliente = 0.0;
+            cantidadPagada = Double.parseDouble(jTextFieldPagado.getText());
+            importeACobrar = Double.parseDouble(jLabelTotalImport.getText());
 
             if (jTextFieldPagado.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Ingrese el pago");
             } else if (importeACobrar > cantidadPagada || cantidadPagada <= 0) {
                 JOptionPane.showMessageDialog(null, "Ingrese una cantidad valida");
             } else {
+                SqlAgregarVenta sqlVenta = new SqlAgregarVenta();
+                agregarVenta venta = new agregarVenta();
+                cambioCliente = (cantidadPagada - importeACobrar);
 
-                JOptionPane.showMessageDialog(this, "Servido vato");
-                double cambioCliente = (cantidadPagada - importeACobrar);
                 jLabelCambioCliente.setText(String.valueOf(cambioCliente));
+
+                venta.setFolio_ven(jTextFieldFolioVenta.getText());
+                venta.setUsuario(USUARIOPRODUCTOS.getText());
+                venta.setCliente(jLabelClienteVenta.getText());
+                venta.setFecha_ven(jLabelFechaVenta.getText());
+                venta.setImporte(Double.parseDouble(jLabelTotalImport.getText()));
+                if (sqlVenta.registrarVenta(venta)) {
+                    for (int i = 0; i < jTableProductosVender.getRowCount(); i++) {
+                        System.out.println(i);
+                        venta.setFolio_ven(jTextFieldFolioVenta.getText());
+                        venta.setCodigo(jTableProductosVender.getValueAt(i, 0).toString());
+                        venta.setCantidad(Integer.parseInt(jTableProductosVender.getValueAt(i, 3).toString()));
+                        venta.setPrecio(Double.parseDouble(jTableProductosVender.getValueAt(i, 6).toString()));
+                        venta.setImporte_ven_p(Double.parseDouble(jTableProductosVender.getValueAt(i, 7).toString()));
+                        if (sqlVenta.registrarVentaProducto(venta)) {
+                            venta.setCodigo(jTableProductosVender.getValueAt(i, 0).toString());
+                            venta.setCantidad(Integer.parseInt(jTableProductosVender.getValueAt(i, 3).toString()));
+                            if (sqlVenta.descontarProducto(venta)) {
+
+                            } else {
+                                System.out.println("Error de descuento stock");
+                            }
+                        } else {
+                            System.out.println("Error de agregar venta producto");
+                        }
+                    }
+                    JOptionPane.showMessageDialog(null, "Venta exitosa");
+                } else {
+                    System.out.println("Error de agregar venta");
+                }
+                JOptionPane.showMessageDialog(null, "Servido vato");
+                codigosVentas();
             }
         } catch (HeadlessException | NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Ingrese el pago");
+            JOptionPane.showMessageDialog(null, "Ingrese el pago" + ex);
         }
 
     }//GEN-LAST:event_jButtonRealizarVentaActionPerformed
@@ -2115,7 +2239,7 @@ public class JFVentas extends javax.swing.JFrame {
 
                             jLabelProductoAVender.setText(jTableInventarioVenta.getValueAt(fila, 0).toString());
                             jTextFieldDescuentoPCantidad.setText(jTableInventarioVenta.getValueAt(fila, 5).toString());
-
+                            jLabelProductoPrecio.setText(jTableInventarioVenta.getValueAt(fila, 5).toString());
                         }
                     } catch (Exception err) {
                         JOptionPane.showMessageDialog(null, "Error:\nSelecciona un registro");
@@ -2134,6 +2258,7 @@ public class JFVentas extends javax.swing.JFrame {
         jButtonAgregarProd.setEnabled(true);
         jButtonIniciarVenta.setEnabled(false);
         jSpinner1.setEnabled(true);
+        jComboBoxDescuento.setEnabled(true);
 
     }//GEN-LAST:event_jButtonIniciarVentaActionPerformed
 
@@ -2182,60 +2307,53 @@ public class JFVentas extends javax.swing.JFrame {
                 jLabelProductoPrecio.setText(jTextFieldDescuentoPCantidad.getText());
                 break;
             case 1:
-                jTextFieldDescuentoPCantidad.setEnabled(true);
-                descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
-                precioFinal = Double.toString(descuento);
-                jLabelProductoPrecio.setText(precioFinal);
-
-                break;
-            case 2:
                 jTextFieldDescuentoPCantidad.setEnabled(false);
                 descuento = (descuentoPCantidad - (descuentoPCantidad * .05));
                 precioFinal = Double.toString(descuento);
                 jLabelProductoPrecio.setText(precioFinal);
                 break;
-            case 3:
+            case 2:
                 jTextFieldDescuentoPCantidad.setEnabled(false);
                 descuento = (descuentoPCantidad - (descuentoPCantidad * .10));
                 precioFinal = Double.toString(descuento);
                 jLabelProductoPrecio.setText(precioFinal);
                 break;
-            case 4:
+            case 3:
                 jTextFieldDescuentoPCantidad.setEnabled(false);
                 descuento = (descuentoPCantidad - (descuentoPCantidad * .15));
                 precioFinal = Double.toString(descuento);
                 jLabelProductoPrecio.setText(precioFinal);
                 break;
-            case 5:
+            case 4:
                 jTextFieldDescuentoPCantidad.setEnabled(false);
                 descuento = (descuentoPCantidad - (descuentoPCantidad * .20));
                 precioFinal = Double.toString(descuento);
                 jLabelProductoPrecio.setText(precioFinal);
                 break;
-            case 6:
+            case 5:
                 jTextFieldDescuentoPCantidad.setEnabled(false);
                 descuento = (descuentoPCantidad - (descuentoPCantidad * .30));
                 precioFinal = Double.toString(descuento);
                 jLabelProductoPrecio.setText(precioFinal);
                 break;
-            case 7:
+            case 6:
                 jTextFieldDescuentoPCantidad.setEnabled(false);
                 descuento = (descuentoPCantidad - (descuentoPCantidad * .40));
                 precioFinal = Double.toString(descuento);
                 break;
-            case 8:
+            case 7:
                 jTextFieldDescuentoPCantidad.setEnabled(false);
                 descuento = (descuentoPCantidad - (descuentoPCantidad * .50));
                 precioFinal = Double.toString(descuento);
                 jLabelProductoPrecio.setText(precioFinal);
                 break;
-            case 9:
+            case 8:
                 jTextFieldDescuentoPCantidad.setEnabled(false);
                 descuento = (descuentoPCantidad - (descuentoPCantidad * .60));
                 precioFinal = Double.toString(descuento);
                 jLabelProductoPrecio.setText(precioFinal);
                 break;
-            case 10:
+            case 9:
                 jTextFieldDescuentoPCantidad.setEnabled(false);
                 descuento = (descuentoPCantidad - (descuentoPCantidad * .70));
                 precioFinal = Double.toString(descuento);
@@ -2243,6 +2361,13 @@ public class JFVentas extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_jComboBoxDescuentoActionPerformed
+
+    private void jTextFieldFolioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFolioVentaKeyTyped
+        String Caracteres = jTextFieldFolioVenta.getText();
+        if (Caracteres.length() > 12) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldFolioVentaKeyTyped
 
     /**
      * @param args the command line arguments

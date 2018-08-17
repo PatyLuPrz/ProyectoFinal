@@ -11,14 +11,41 @@ package modelo;
  */
 public class agregarVenta {
 
-    String codigo;
-    String nombre;
-    String categoria;
-    Integer cantidad;
-    String usuario;
-    String cliente;
-    Double precio;
-    Double importe;
+    String codigo; // COdigo Producto
+    String folio_ven; //Folio de la venta
+    String fecha_ven; //Fecha de la venta
+    String nombre; //Producto
+    String categoria; //Categoria de producto
+    Integer cantidad; //Cantidad de productos en stock
+    String usuario; //Usuario que realiza la venta
+    String cliente; //Cliente o Publico general
+    Double precio; // Precio original de la tabla productos
+    Double importe; //importe total de venta
+    Double importe_ven_p;
+
+    public Double getImporte_ven_p() {
+        return importe_ven_p;
+    }
+
+    public void setImporte_ven_p(Double importe_ven_p) {
+        this.importe_ven_p = importe_ven_p;
+    }
+
+    public String getFolio_ven() {
+        return folio_ven;
+    }
+
+    public void setFolio_ven(String folio_ven) {
+        this.folio_ven = folio_ven;
+    }
+
+    public String getFecha_ven() {
+        return fecha_ven;
+    }
+
+    public void setFecha_ven(String fecha_ven) {
+        this.fecha_ven = fecha_ven;
+    }
 
     public String getCodigo() {
         return codigo;

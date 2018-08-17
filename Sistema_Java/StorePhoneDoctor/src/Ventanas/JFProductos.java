@@ -1,6 +1,5 @@
 package Ventanas;
 
-import static Ventanas.JFMenuPrincipal.TIPOUSUARIOMENU;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -8,9 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -21,6 +20,7 @@ import modelo.Conexion;
 import modelo.SqlProductos;
 import modelo.fotoclass;
 import modelo.productos;
+import modelo.GenerarCodigos;
 
 /**
  *
@@ -148,6 +148,53 @@ public class JFProductos extends javax.swing.JFrame {
 
     }
 
+    void codigos() {
+
+        int j;
+        int cont = 1;
+        String num = "";
+        String c =  "";
+
+        // String SQL="select count(*) from factura";
+        //String SQL="SELECT MAX(cod_emp) AS cod_emp FROM empleado";
+        //String SQL="SELECT @@identity AS ID"; 
+
+        Conexion conn = new Conexion();
+        Connection con = conn.getConexion();
+        String SQL = "select max(CODIGO_P) from productos";
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+            if (rs.next()) {
+                c = rs.getString(1);
+            }
+
+            if (c == null) {
+                jTextFieldCodigoPr.setText("SPD0000000001");
+            } else {
+                char r1 = c.charAt(3);
+                char r2 = c.charAt(4);
+                char r3 = c.charAt(5);
+                char r4 = c.charAt(6);
+                char r5 = c.charAt(7);
+                char r6 = c.charAt(8);
+                char r7 = c.charAt(9);
+                char r8 = c.charAt(10);
+                char r9 = c.charAt(11);
+                char r10 = c.charAt(12);
+                String r = "";
+                r = "" + r1 + r2 + r3 + r4 + r5 + r6 + r7 + r8 + r9 + r10;
+                j = Integer.parseInt(r);
+                GenerarCodigos gen = new GenerarCodigos();
+                gen.generar(j);
+                jTextFieldCodigoPr.setText("SPD" + gen.serie());
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error" + ex);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -237,7 +284,7 @@ public class JFProductos extends javax.swing.JFrame {
 
         jLabelCodigoPr.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelCodigoPr.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelCodigoPr.setText("  Codigo:");
+        jLabelCodigoPr.setText("Codigo:");
 
         jLabelNombrePr.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelNombrePr.setForeground(new java.awt.Color(255, 255, 255));
@@ -365,7 +412,6 @@ public class JFProductos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelCodigoPr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(3, 3, 3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNombrePr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNombrePr, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1074,6 +1120,8 @@ public class JFProductos extends javax.swing.JFrame {
     private void jButtonNuevoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoPActionPerformed
         int cancelar = JOptionPane.showConfirmDialog(null, "Agregar Nuevo Producto", "Nuevo Producto", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (cancelar == 0) {
+            jTextFieldCodigoPr.requestFocus();
+            codigos();
             jButtonGuardarP.setEnabled(true);
             jButtonCancelarP.setEnabled(true);
             jButtonActualizarP.setEnabled(false);
