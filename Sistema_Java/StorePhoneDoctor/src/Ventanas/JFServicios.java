@@ -24,6 +24,8 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Conexion;
 import modelo.FechaConsulta;
 import modelo.GenerarCodigos;
+import modelo.SqlClientes;
+import modelo.clientes;
 import modelo.servicios;
 import modelo.sqlServicios;
 
@@ -419,7 +421,7 @@ public class JFServicios extends javax.swing.JFrame {
                 .addComponent(jButtonClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelLogoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -679,6 +681,11 @@ public class JFServicios extends javax.swing.JFrame {
 
         jButtonBorrarS.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
         jButtonBorrarS.setText("Borrar");
+        jButtonBorrarS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarSActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelEdicionServiciosLayout = new javax.swing.GroupLayout(jPanelEdicionServicios);
         jPanelEdicionServicios.setLayout(jPanelEdicionServiciosLayout);
@@ -1131,14 +1138,14 @@ public class JFServicios extends javax.swing.JFrame {
             jTextFieldFechaEntradaS.setText(fecha.fechaactual());
             try {
 
-                servi.setFolio_serv(jTextFieldFolioS.getText());
                 servi.setUsername_serv_users(jTextFieldUsernameUs.getText());
                 servi.setUsername_serv_clien(jTextFieldUsernameClS.getText());
-                servi.setTelefono_cliente_serv(jTextFieldFechaSalidaS.getText());
                 servi.setNombre_cliente_serv(jTextFieldNombreClienteS.getText());
+                servi.setFecha_salida_serv(jTextFieldFechaSalidaS.getText());
                 servi.setTelefono_cliente_serv(jTextFieldTelefonoClienteS.getText());
                 servi.setDescripcion_serv(jTextAreaDescripcionS.getText());
                 servi.setPrecio_serv(Double.parseDouble(jTextFieldPrecioS.getText()));
+                servi.setFolio_serv(jTextFieldFolioS.getText());
                 if (sqlServ.actualizarServicio(servi)) {
                     limpiarCampos();
                     tablaConsulta();
@@ -1246,7 +1253,7 @@ public class JFServicios extends javax.swing.JFrame {
 
     private void jTextFieldFolioSKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFolioSKeyTyped
         String Caracteres = jTextFieldFolioS.getText();
-        if (Caracteres.length() > 9) {
+        if (Caracteres.length() > 12) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextFieldFolioSKeyTyped
@@ -1291,6 +1298,28 @@ public class JFServicios extends javax.swing.JFrame {
     private void jButtonFinalizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarServicioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonFinalizarServicioActionPerformed
+
+    private void jButtonBorrarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarSActionPerformed
+        int cancelar = JOptionPane.showConfirmDialog(null, "¿Borrar Servicio?", "Eliminar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (cancelar == 0) {
+            sqlServicios sqlServ = new sqlServicios();
+            servicios servi = new servicios();
+            try {
+
+                servi.setFolio_serv(jTextFieldFolioS.getText());
+
+                if (sqlServ.borrarServ(servi)) {
+                    tablaConsulta();
+                    JOptionPane.showMessageDialog(null, "El servicio fue borrado");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al eliminar");
+                }
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "No puedes borrar este cliente");
+            }
+        }
+    }//GEN-LAST:event_jButtonBorrarSActionPerformed
 
     /**
      * @param args the command line arguments

@@ -42,7 +42,7 @@ public class sqlServicios extends Conexion {
     public boolean actualizarServicio(servicios serv) {
         PreparedStatement ps = null; //variable de Statement
         Connection con = (Connection) getConexion(); //Se obtiene la conexion para la clase
-        String sql = "UPDATE servicios SET USERNAME_US=?, USERNAME_CL=?, NOMBRECLIENTE_S=?, FECHALLEGADA_S, TELEFONOCLIENTE_S=?, DESCRIPCION_S=?, PRECIO_S=? WHERE FOLIO_S = ?";
+        String sql = "UPDATE servicios SET USERNAME_US=?, USERNAME_CL=?, NOMBRECLIENTE_S=?, FECHASALIDA_S=?, TELEFONOCLIENTE_S=?, DESCRIPCION_S=?, PRECIO_S=? WHERE FOLIO_S = ?";
         try {
 
             ps = (PreparedStatement) con.prepareStatement(sql);
@@ -54,6 +54,23 @@ public class sqlServicios extends Conexion {
             ps.setString(6, serv.getDescripcion_serv());
             ps.setDouble(7, serv.getPrecio_serv());
             ps.setString(8, serv.getFolio_serv());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(SqlUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error" + ex);
+            return false;
+        }
+    }
+
+    public boolean borrarServ(servicios sers) {
+        PreparedStatement ps = null; //variable de Statement
+        Connection con = (Connection) getConexion(); //Se obtiene la conexion para la clase
+        String sql = "DELETE FROM servicios WHERE FOLIO_S = ?";
+        try {
+
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps.setString(1, sers.getFolio_serv());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

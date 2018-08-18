@@ -76,6 +76,7 @@ public class JFVentas extends javax.swing.JFrame {
                 i -= 1;
             }
             codigosVentas();
+            jLabelFechaVenta.setText(fecha());
             jButtonRealizarVenta.setEnabled(false);
             jButtonRealizarCalculo.setEnabled(false);
             jButtonCancelarVenta.setEnabled(false);
@@ -97,7 +98,7 @@ public class JFVentas extends javax.swing.JFrame {
                 component.setEnabled(false);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+            JOptionPane.showMessageDialog(null, "");
         }
     }
 
@@ -189,7 +190,6 @@ public class JFVentas extends javax.swing.JFrame {
 
         tablaConsultaClientes();
         tablaConsultaProductos();
-
         jLabelFechaVenta.setText(fecha());
 
         setIconImage(new ImageIcon(getClass().getResource("../Images/blanco-logo.png")).getImage());
@@ -1492,7 +1492,7 @@ public class JFVentas extends javax.swing.JFrame {
         jPanelInterfazVentasLayout.setVerticalGroup(
             jPanelInterfazVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInterfazVentasLayout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
 
@@ -1908,7 +1908,8 @@ public class JFVentas extends javax.swing.JFrame {
                 } else {
                     System.out.println("Error de agregar venta");
                 }
-                JOptionPane.showMessageDialog(null, "Servido vato");
+                JOptionPane.showMessageDialog(null, "Venta Realizada");
+                limpiarCampos();
                 codigosVentas();
             }
         } catch (HeadlessException | NumberFormatException ex) {

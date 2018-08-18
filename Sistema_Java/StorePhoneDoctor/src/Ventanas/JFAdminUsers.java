@@ -149,7 +149,6 @@ public class JFAdminUsers extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAdminUsers = new javax.swing.JTable();
         jLabelIconoBuscar = new javax.swing.JLabel();
-        jButtonBorrar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -444,21 +443,13 @@ public class JFAdminUsers extends javax.swing.JFrame {
         jLabelIconoBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconoBuscar.png"))); // NOI18N
         jPanel1.add(jLabelIconoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 319, -1, -1));
 
-        jButtonBorrar.setText("Borrar");
-        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBorrarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 337, 132, -1));
-
         jButtonModificar.setText("Modificar");
         jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 337, 132, -1));
+        jPanel1.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 330, 132, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -611,10 +602,6 @@ public class JFAdminUsers extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCorreoUsuarioActionPerformed
 
-    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonBorrarActionPerformed
-
     private void jTextFieldBuscarUsuerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscarUsuerKeyTyped
         try {
             DefaultTableModel modelo = new DefaultTableModel();
@@ -705,7 +692,6 @@ public class JFAdminUsers extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel TIPOUSUARIOMENU;
     public javax.swing.JLabel USUARIOMENU;
-    private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonMenuP;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JComboBox<String> jComboBoxTipoUser;
