@@ -30,7 +30,7 @@
               <h3>Reparación de equipos</h3>
               <hr>
               <p>En nuestro establecimiento podras encontrar servicios de soporte tecnico para tu dispositivo, ya sea tu celular o una computadora</p>
-              <a href="servicios.php" class="btn btn-dark">Ver ubicación...</a>
+              <a href="servicios.php" class="btn btn-dark">Ver servicios...</a>
             </div>
           </div>
         </div>

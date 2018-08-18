@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['tipo'] != "admin"){
     
 }
 else{
-    echo "Esta pagina es solo para usuarios registrados.<br>";
-    echo "<br><a href='login.html'>Login</a>";
-    echo "<br><br><a href='index.html'>Registrarme</a>";
+    header("location:error-01.php");
 
     exit;
 }
@@ -16,22 +14,23 @@ $now = time();
 
 if($now > $_SESSION['expire']){
     session_destroy();
-    echo "Su sesion a caducado,
-    <a href=login.php>Inicie sesion nuevamente</a>";
+    header("location:error-02.php");
     exit;
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        
-        <link rel="stylesheet" type="text/css" href="styles.css">
-        <link rel="stylesheet" type="text/css" href="main.css">
-        <link href="https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope|Bigelow+Rules|Boogaloo|Indie+Flower|Love+Ya+Like+A+Sister|Marcellus+SC|Nanum+Gothic|Pompiere|Rancho|Roboto+Mono|Six+Caps|Special+Elite|Squada+One|Sue+Ellen+Francisco|Tenor+Sans" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Handlee|Open+Sans+Condensed:300" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="your_website_domain/css_root/flaticon.css"> 
-        <meta charset="UTF-8">
+
+
+
+    <!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="main.css" type="text/css">
+  <meta charset="UTF-8">
         <title> Perfil de Usuario </title>
         <style>
           .title{
@@ -49,8 +48,17 @@ if($now > $_SESSION['expire']){
           }
         </style>
     </head>
-    <body class="" style="background-image: url('img/FondoPrograma.png');background-repeat:no-repeat;">
-<?php include("includes/nav.php"); ?>
+
+<body class="" style="background-image: url('img/FondoPrograma.png');background-repeat:no-repeat;">
+  <?php include("includes/nav.php"); ?>
+  <div class="py-5 m-0">
+    <div class="container">
+    <br><br><br><br><br><br>
+      <div class="row">
+        <div class="col-md-12 bg-light">
+            <div class="py-5 bg-light">
+                <div class="form-group">
+    
 <?php
         $bd_host="localhost";
         $bd_user="root";
@@ -64,7 +72,7 @@ if($now > $_SESSION['expire']){
             printf("Fallo la contexion: %s/n", mysqli_connect_error());
             exit();
         }
-        $consultar = "SELECT * FROM clientes WHERE USERNAME_CL LIKE '$nombre'";
+        $consultar = "SELECT USERNAME_CL, EMAIL_CL, NOMBRE_CL,AP_CL,AM_CL,TEL_CL,MUN_CL FROM clientes WHERE USERNAME_CL LIKE '$nombre'";
             
             # my sqli_query - Realiza una consulta a a base de datos
             mysqli_set_charset($conectar,'utf-8');
@@ -74,22 +82,21 @@ if($now > $_SESSION['expire']){
                
                 while($fila=mysqli_fetch_row($resultado)){
                     printf("
-                    <br><br><br><br><br><br>
-        <div class='col-md-6 p-0'>
-          <div class='card'>
-            <div class='card-body p-5>
-                <h1>Datos del usuario</h1>
+                    <center>
+                
                   <div class='form-group'>
-                    <label class='title'>Nombre de usuario</label>
-                    <br> <p id='data'> %s </p>  
+                  <h1>Datos del usuario</h1>
+                    <h1 class='title'>Nombre de usuario: %s</h1>
+                    
                   </div>
+                  
                   <div class='form-group'>
                     <label class='title'>Email</label> <a id='ed' href='form-edit-email.php'>Editar</a>
                     <br><p id='data'> %s </p>
                   </div>
                   <div class='form-group'>
-                    <label>Contraseña</label> <a id='ed' href='form-edit-pass.php'>Editar</a>
-                    <br> <p id='data'> %s </p>
+                    <label class='title'>Contraseña</label> <a id='ed' href='form-edit-pass.php'>Editar</a>
+                    <br> <p id='data'> *********** </p>
                   </div>
                   <div class='form-group'>
                     <label class='title'>Nombre</label> <a id='ed' href='form-edit-nombre.php'>Editar</a>
@@ -102,18 +109,15 @@ if($now > $_SESSION['expire']){
                   <div class='form-group'>
                     <label class='title'>Municipio</label> <a id='ed' href='form-edit-municipio.php'>Editar</a>
                     <br><p id='data'> %s </p>
-                  </div>
-            </div>
-          </div>
-        </div>",
+                    </center>
+                 ",
                   $fila[0],
                   $fila[1],
                   $fila[2],            
                   $fila[3],
                   $fila[4],
                   $fila[5],
-                  $fila[6],
-                  $fila[7]);
+                  $fila[6]);
                 }
                 mysqli_free_result($resultado);
             }
@@ -121,11 +125,15 @@ if($now > $_SESSION['expire']){
         mysqli_close($conectar);
                      
         ?>
-    
-
-
-<div class="col-md-6 p-0">
-          
-
+    </div>
+    </div>
+  </div>
 </div>
+</div>
+</div>
+</div>
+<?php include("includes/foot.php"); ?>
+</body>
+
+</html>
     

@@ -28,6 +28,7 @@
       <div class="row">
         <div class="col-md-12 mt-3 text-center">
           <p>© Copyright 2017 StorePhone Doctor - Todos los derechos reservados.</p>
+          <p> <a href="login-adm.php"> Acceso para administradores </a></p>
         </div>
       </div>
     </div>

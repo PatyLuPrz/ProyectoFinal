@@ -8,8 +8,8 @@
           <br> </b>
       </a>
       <form method="post" action="buscar.php" class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="buscar">
-        <button class="btn my-2 my-sm-0 btn-outline-secondary" type="submit">Search</button>
+        <input class="form-control mr-sm-2" type="text" placeholder="Buscar" name="buscar">
+        <button class="btn my-2 my-sm-0 btn-outline-secondary" type="submit">Buscar</button>
       </form>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent">
         <span class="navbar-toggler-icon"></span>
@@ -33,8 +33,8 @@
               <i class="fa fa-user fa-fw"></i>Inicio</a>
           </li>
         </ul>
-        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="loguot.php">
-          <i class="fa d-inline fa-lg fa-user-circle-o"></i> Cerrar sesión</a>
+        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="logout.php">
+          <i class="fa d-inline fa-lg fa-user-circle-o"></i> Salir</a>
       </div>
     </div>
   </nav> 

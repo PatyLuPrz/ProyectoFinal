@@ -10,13 +10,22 @@ session_start();
   <link rel="stylesheet" href="main.css" type="text/css"> 
   <style>
         #titulo{
-            color: white;
+            color: #3F3F3F;
+        }
+        .panel-control{
+            padding:2em;
+            width: auto;
+            height:auto;
+            margin:2em;
+            background-color: #F3F3F3 ;
         }
     </style>
 </head>
 
 <body class="" style="background-image: url('img/FondoPrograma.png');background-repeat:no-repeat;">
-<?php include("includes/nav.php"); ?>
+<br><br><br><br><br><br><br>
+<div class="panel-control">
+<?php include("includes/nav-us.php"); ?>
 <?php
             try
                 {
@@ -39,14 +48,15 @@ session_start();
                 $numRegistros = $sentenciaPrep->rowCount();
                 if ($numRegistros !=0)
                 {
-                    session_start();
                     $_SESSION['loggedin'] = true;
                     $_SESSION['USERNAME_CL'] = $username;
+                    $_SESSION['tipo']="cliente";
                     $_SESSION['start'] = time();
                     $_SESSION['expire'] = $_SESSION['start'] + (20 * 5);
-                    echo "<br><br><br><br><br><br>";
-                    echo "<h1 id='titulo'>Bienvenido! " . $_SESSION['USERNAME_CL']."</h1>";
-                    echo "<br><br><a href='panel-control.php'>Panel de Control</a>"; 
+                    
+                    echo "<center><h1 id='titulo'>Bienvenido! " . $_SESSION['USERNAME_CL']."</h1>";
+                    echo "<br><br><br><br><a href='panel-control.php'>Panel de Control</a>&nbsp;&nbsp;"; 
+                    echo "|| &nbsp;&nbsp; <a href='productos-cl.php'>Ver mis ofertas</a></center>"; 
 
                 }
                 else
@@ -63,9 +73,9 @@ session_start();
         finally{    $conMySQL = null;   }
         ?>
 
-
-
-<?php include("includes/foot.php"); ?>
+</div>
+<br><br>
+<?php include("includes/foot-us.php"); ?>
 
 </body>
 </html>

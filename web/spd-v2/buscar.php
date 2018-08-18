@@ -89,6 +89,9 @@
                 }
                 mysqli_free_result($resultado);
             }
+            else{
+                header("location:error.php");
+            }
         
         mysqli_close($conectar);
                      

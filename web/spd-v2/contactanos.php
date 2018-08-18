@@ -24,7 +24,7 @@
         <div class="col-md-6">
           <h1>Contactanos</h1>
           <p>Estaremos encantados de escuchar tus opiniones, pedidos y sugerencias</p>
-          <form method="post" action="mailto:storephonedoctor@gmail.com">
+          <form method="post" action="https://formspree.io/storephonedoctor@gmail.com">
             <div class="form-group">
               <label for="InputName">¿Cuál es tu nombre?</label>
               <input type="text" name="asunto" class="form-control" id="InputName" placeholder="Tu nombre"> </div>
