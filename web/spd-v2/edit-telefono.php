@@ -45,10 +45,10 @@ try{
                     $numRegistros = $sentenciaPrep->rowCount();  
                     if ($numRegistros !=0)
                     { 
-                        echo "datos guardados";
+                        header("location:registro-exitoso.php");
                     }
                     else{
-                        echo "error en el update";
+                        header("location:error-03.php");
                     }
             }
                 catch(Exception $e)

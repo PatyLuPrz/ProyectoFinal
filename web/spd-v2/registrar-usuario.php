@@ -34,10 +34,13 @@
 				font-size: 20px;
 				text-align: center;
 			}
-				
+    .txt{
+        color: white;
+    }
         </style>    
 </head>
 <?php include("includes/nav.php"); ?>
+<body class="" style="background-image: url('img/FondoPrograma.png');background-repeat:no-repeat;">
   <div class="py-5">
     <div class="container">
       <div class="row">
@@ -86,7 +89,7 @@ $buscarEmail = "SELECT * FROM $tbl_name
      
  echo "<br />". "El Nombre de Usuario o Correo electronico ya a sido tomado." . "<br />";
 
- echo "<a href='index.html'>Por favor escoga otro Nombre</a>";
+ echo "<a href='singup.php'>Por favor escoga otro Nombre</a>";
  }
  else{
 
@@ -95,19 +98,23 @@ $buscarEmail = "SELECT * FROM $tbl_name
 
  if ($conexion->query($query) === TRUE) {
  
- echo "<br />" . "<h2>" . "Usuario Creado Exitosamente!" . "</h2>";
- echo "<h4>" . "Bienvenido: " . $USERNAME_CL . "</h4>" . "\n\n";
- echo "<h5>" . "Hacer Login: " . "<a href='login.html'>Login</a>" . "</h5>"; 
+ echo "<br />" . "<h2 class='txt'>" . "Usuario Creado Exitosamente!" . "</h2>";
+ echo "<h4 class='txt'>" . "Bienvenido: " . $USERNAME_CL . "</h4>" . "\n\n";
+ echo "<h5 class='txt'>" . "Hacer Login: " . "<a href='login.php'>Login</a>" . "</h5>"; 
  }
 
  else {
- echo "Error al crear el usuario." . $query . "<br>" . $conexion->error; 
+    header("location:error-03.php");
    }
  }
  mysqli_close($conexion);
 ?>
 
-                
+       </div>
+       </div>
+       </div>
+       </div>
+       </div>         
 <?php include("includes/foot.php"); ?>  
 </body>
 
