@@ -6,9 +6,11 @@
 package Ventanas;
 
 import static Ventanas.JFMenuPrincipal.TIPOUSUARIOMENU;
+import java.awt.Event;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +18,9 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -74,9 +78,16 @@ public class JFClientes extends javax.swing.JFrame {
         }
     }
 
+    public void bloquearCYPC() {
+        InputMap map1 = jTextFieldTelefonoC.getInputMap(jTextFieldTelefonoC.WHEN_FOCUSED);
+        map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null"); //Bloquea el ctrl + v y ctrl + c
+
+    }
+
     public JFClientes() {
         initComponents();
         tablaConsulta();
+        bloquearCYPC();
         jButtonGuardarC.setEnabled(false);
         jButtonCancelarC.setEnabled(false);
 
@@ -805,6 +816,8 @@ public class JFClientes extends javax.swing.JFrame {
         if (cancelar == 0) {
             SqlClientes modSql = new SqlClientes(); //Se creaun nuevo objeto de la clase SqlUsuarios llamadp modSql
             clientes mod = new clientes(); //Se crea un nuevo objeto de la clase usuarios llamado mod
+            String pass = new String(jTextFieldUsernameClien.getText());
+            String nuevoPass = hash.sha1(pass);
 
             try {
                 if (jTextFieldUsernameClien.getText().equals("") || jTextFieldEmailC.getText().equals("") || jPasswordFieldPasswdC.getText().equals("") || jTextFieldNombreC.getText().equals("") || jTextFieldApellidoPC.getText().equals("") || jTextFieldApellidoMC.getText().equals("") || jTextFieldTelefonoC.getText().equals("") || jTextFieldMunicipioC.getText().equals("")) {
@@ -816,7 +829,7 @@ public class JFClientes extends javax.swing.JFrame {
 
                             mod.setUsername_Clien(jTextFieldUsernameClien.getText());
                             mod.setEmail_Clien(jTextFieldEmailC.getText());
-                            mod.setContrasena_Clien(jTextFieldUsernameClien.getText());
+                            mod.setContrasena_Clien(nuevoPass);
                             mod.setNombre_Clien(jTextFieldNombreC.getText());
                             mod.setAp_Clien(jTextFieldApellidoPC.getText());
                             mod.setAm_Clien(jTextFieldApellidoMC.getText());
@@ -958,26 +971,39 @@ public class JFClientes extends javax.swing.JFrame {
             SqlClientes sqlClien = new SqlClientes();
             clientes clien = new clientes();
             try {
-
-                clien.setUsername_Clien(jTextFieldUsernameClien.getText());
-                clien.setEmail_Clien(jTextFieldEmailC.getText());
-                clien.setNombre_Clien(jTextFieldNombreC.getText());
-                clien.setAp_Clien(jTextFieldApellidoPC.getText());
-                clien.setAm_Clien(jTextFieldApellidoMC.getText());
-                clien.setTel_Clien(jTextFieldTelefonoC.getText());
-                clien.setMun_Clien(jTextFieldMunicipioC.getText());
-                if (sqlClien.actualizarClien(clien)) {
-                    tablaConsulta();
-                    JOptionPane.showMessageDialog(null, "El cliente fue actualizado");
+                if (jTextFieldUsernameClien.getText().equals("") || jTextFieldEmailC.getText().equals("") || jPasswordFieldPasswdC.getText().equals("") || jTextFieldNombreC.getText().equals("") || jTextFieldApellidoPC.getText().equals("") || jTextFieldApellidoMC.getText().equals("") || jTextFieldTelefonoC.getText().equals("") || jTextFieldMunicipioC.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Debe llenar todos los campos\n¡No se permiten campos vacios!");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Error al actualizar");
+
+                    if (sqlClien.existeCliente(jTextFieldUsernameClien.getText()) == 0) {
+                        if (sqlClien.esEmail(jTextFieldEmailC.getText())) {
+
+                            clien.setUsername_Clien(jTextFieldUsernameClien.getText());
+                            clien.setEmail_Clien(jTextFieldEmailC.getText());
+                            clien.setNombre_Clien(jTextFieldNombreC.getText());
+                            clien.setAp_Clien(jTextFieldApellidoPC.getText());
+                            clien.setAm_Clien(jTextFieldApellidoMC.getText());
+                            clien.setTel_Clien(jTextFieldTelefonoC.getText());
+                            clien.setMun_Clien(jTextFieldMunicipioC.getText());
+                            if (sqlClien.actualizarClien(clien)) {
+                                tablaConsulta();
+                                JOptionPane.showMessageDialog(null, "El cliente fue actualizado");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Error al actualizar");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Este correo ya esta registrado");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El cliente ya existe en el registro");
+                    }
                 }
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Error" + ex);
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "");
+            JOptionPane.showMessageDialog(null, "No se actualizo la informacion de ningun cliente");
         }
     }//GEN-LAST:event_jButtonActualizarCActionPerformed
 

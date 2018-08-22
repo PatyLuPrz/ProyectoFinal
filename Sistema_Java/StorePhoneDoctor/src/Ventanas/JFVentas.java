@@ -1773,7 +1773,7 @@ public class JFVentas extends javax.swing.JFrame {
                     tipobusq = "CANTIDAD_P";
                     break;
                 case 6:
-                    tipobusq = "PRECIO_COMPRA_P";
+                    tipobusq = "PRECIO_VENTA_P";
                     break;
             }
 

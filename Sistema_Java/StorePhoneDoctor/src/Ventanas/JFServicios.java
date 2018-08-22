@@ -7,8 +7,10 @@ package Ventanas;
 
 import static Ventanas.JFMenuPrincipal.TIPOUSUARIOMENU;
 import java.awt.Component;
+import java.awt.Event;
 import java.awt.Toolkit;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,15 +19,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import modelo.Conexion;
 import modelo.FechaConsulta;
 import modelo.GenerarCodigos;
-import modelo.SqlClientes;
-import modelo.clientes;
 import modelo.servicios;
 import modelo.sqlServicios;
 
@@ -91,10 +93,22 @@ public class JFServicios extends javax.swing.JFrame {
         jTextAreaDescripcionS.setText("");
     }
 
+    public void bloquearCYPS() {
+        InputMap map1 = jTextFieldNombreClienteS.getInputMap(jTextFieldPrecioS.WHEN_FOCUSED);
+        map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null"); //Bloquea el ctrl + v y ctrl + c
+        
+        InputMap map2 = jTextFieldTelefonoClienteS.getInputMap(jTextFieldPrecioS.WHEN_FOCUSED);
+        map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null"); //Bloquea el ctrl + v y ctrl + c
+        
+        InputMap map3 = jTextFieldPrecioS.getInputMap(jTextFieldPrecioS.WHEN_FOCUSED);
+        map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null"); //Bloquea el ctrl + v y ctrl + c
+    }
+
     public JFServicios() {
         initComponents();
 
         tablaConsulta();
+        bloquearCYPS();
 
         //Fecha para BD
         modelo.FechaConsulta fecha = new modelo.FechaConsulta();
@@ -173,7 +187,7 @@ public class JFServicios extends javax.swing.JFrame {
         //String SQL="SELECT @@identity AS ID"; 
         Conexion conn = new Conexion();
         Connection con = conn.getConexion();
-        String SQL = "SELECT MAX(FOLIO_V) FROM ventas";
+        String SQL = "SELECT MAX(FOLIO_S) FROM servicios";
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
@@ -497,6 +511,13 @@ public class JFServicios extends javax.swing.JFrame {
         jLabelTelefonoCliente.setText("Telefono Cliente:");
 
         jTextFieldTelefonoClienteS.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextFieldTelefonoClienteS.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTextFieldTelefonoClienteSInputMethodTextChanged(evt);
+            }
+        });
         jTextFieldTelefonoClienteS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTelefonoClienteSActionPerformed(evt);
@@ -1268,7 +1289,10 @@ public class JFServicios extends javax.swing.JFrame {
     private void jTextFieldTelefonoClienteSKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTelefonoClienteSKeyTyped
         String Caracteres = jTextFieldTelefonoClienteS.getText();
         if (Caracteres.length() > 19) {
-            evt.consume();
+            evt.consume(); //No acepta mas de 20 caracteres
+        }
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();//Solo acepta numeros o enteros
         }
     }//GEN-LAST:event_jTextFieldTelefonoClienteSKeyTyped
 
@@ -1320,6 +1344,10 @@ public class JFServicios extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButtonBorrarSActionPerformed
+
+    private void jTextFieldTelefonoClienteSInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextFieldTelefonoClienteSInputMethodTextChanged
+
+    }//GEN-LAST:event_jTextFieldTelefonoClienteSInputMethodTextChanged
 
     /**
      * @param args the command line arguments

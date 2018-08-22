@@ -1,7 +1,9 @@
 package Ventanas;
 
+import java.awt.Event;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +12,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -95,12 +99,23 @@ public class JFProductos extends javax.swing.JFrame {
         jTextFieldCantidadPr.setText("");
         jTextFieldPrecioCompraPr.setText("");
         jTextFieldPrecioVentaPr.setText("");
-
+    }
+    
+    public void bloquearCYPP() {
+        InputMap map1 = jTextFieldCantidadPr.getInputMap(jTextFieldCantidadPr.WHEN_FOCUSED);
+        map1.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null"); //Bloquea el ctrl + v y ctrl + c
+        
+        InputMap map2 = jTextFieldPrecioCompraPr.getInputMap(jTextFieldPrecioCompraPr.WHEN_FOCUSED);
+        map2.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null"); //Bloquea el ctrl + v y ctrl + c
+        
+        InputMap map3 = jTextFieldPrecioVentaPr.getInputMap(jTextFieldPrecioVentaPr.WHEN_FOCUSED);
+        map3.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Event.CTRL_MASK), "null"); //Bloquea el ctrl + v y ctrl + c
     }
 
     public JFProductos() {
         initComponents();
         tablaConsulta();
+        bloquearCYPP();
         rutaImagen = "";
         jButtonGuardarP.setEnabled(false);
         jButtonCancelarP.setEnabled(false);
